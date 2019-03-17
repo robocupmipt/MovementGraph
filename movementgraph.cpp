@@ -4,8 +4,7 @@
 
 using namespace AL;
 
-
-MovementGraph::MovementGraph(boost::shared_ptr<ALBroker> broker, const std::string& name):
+MovementGraph::MovementGraph(boost::shared_ptr<ALBroker> broker, const std::string &name) :
     ALModule(broker, name),
     graph_(broker) {
 
@@ -78,7 +77,6 @@ MovementGraph::~MovementGraph() {}
 
 void MovementGraph::init() {
 }
-
 
 void MovementGraph::Move(float x, float y, float theta) {
   graph_.Move(x, y, theta);

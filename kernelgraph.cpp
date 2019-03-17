@@ -11,22 +11,21 @@ KernelGraph::KernelGraph(boost::shared_ptr<AL::ALBroker> broker) :
 Vertex KernelGraph::GetCurrentState() const {
   bool useSensors = true;
 
-  std::vector <float> result = motion_.getAngles(PARAM_NAMES, useSensors);
+  std::vector<float> result = motion_.getAngles(PARAM_NAMES, useSensors);
   return Vertex(result, true);
 }
 
-bool KernelGraph::RunChain(const std::vector <std::string>& chain,
-              int cnt,
-              float acceleration) {
+bool KernelGraph::RunChain(const std::vector<std::string> &chain,
+                           int cnt,
+                           float acceleration) {
   assert(cnt > 0);
   assert(chain.size() > 1);
 
-  std::vector <const Edge*> way, full_way;
+  std::vector<const Edge *> way, full_way;
 
   if (!FindWayThroughVertexes(chain, way)) {
     return false;
   }
-
 
   for (int i = 0; i < cnt; ++i) {
     for (int j = 0; j < way.size(); ++j) {
@@ -39,7 +38,7 @@ bool KernelGraph::RunChain(const std::vector <std::string>& chain,
   return true;
 }
 
-bool KernelGraph::Run(const std::string& v_name, float time) {
+bool KernelGraph::Run(const std::string &v_name, float time) {
   if (!IsVertexContains(v_name)) {
     return false;
   }
@@ -48,7 +47,7 @@ bool KernelGraph::Run(const std::string& v_name, float time) {
   return true;
 }
 
-void KernelGraph::Run(const Vertex* v, float time) {
+void KernelGraph::Run(const Vertex *v, float time) {
   assert(v != nullptr);
   assert(time > 0);
 
@@ -64,7 +63,7 @@ void KernelGraph::Wake() const {
 }
 
 void KernelGraph::StrongRest() const {
-  std::vector <float> param;
+  std::vector<float> param;
   for (int i = 0; i < PARAM_NUM_; ++i) {
     param.push_back(0);
   }
@@ -72,7 +71,7 @@ void KernelGraph::StrongRest() const {
 }
 
 void KernelGraph::StrongWake() const {
-  std::vector <float> param;
+  std::vector<float> param;
   for (int i = 0; i < PARAM_NUM_; ++i) {
     param.push_back(1);
   }
@@ -114,7 +113,7 @@ void KernelGraph::MoveFast(float x, float y, float theta) {
   }
   if (len > EPS) {
     GoForwardFast(len);
-  } 
+  }
   if (second_rotate > EPS) {
     Rotate(second_rotate);
   }
@@ -151,7 +150,7 @@ void KernelGraph::SetHeadVerticalAngle(float angle) {
   assert(angle <= 38.5);
   assert(angle >= -29.5);
 
-  float fractionMaxSpeed  = 0.3;
+  float fractionMaxSpeed = 0.3;
   motion_.setAngles(PARAM_NAMES[1], -angle * TO_RAD, fractionMaxSpeed);
 }
 
@@ -159,7 +158,7 @@ void KernelGraph::SetHeadHorizontalAngle(float angle) {
   assert(angle <= 119.5);
   assert(angle >= -119.5);
 
-  float fractionMaxSpeed  = 0.3;
+  float fractionMaxSpeed = 0.3;
   motion_.setAngles(PARAM_NAMES[0], angle * TO_RAD, fractionMaxSpeed);
 }
 
@@ -170,23 +169,23 @@ void KernelGraph::ToInit() {
 
 void KernelGraph::LookDown(int level) {
   assert(level <= 7);
-  std::vector <std::string> names({"INIT", "FB" + std::to_string(level)});
+  std::vector<std::string> names({"INIT", "FB" + std::to_string(level)});
   RunChain(names, 1);
 }
 
 void KernelGraph::GetUpFront() {
-  std::vector <std::string> names({"GUF0", "GUF15"});
+  std::vector<std::string> names({"GUF0", "GUF15"});
   RunChain(names, 1);
   //posture_.goToPosture("StandInit", 0.5);
 }
 
 void KernelGraph::GetUpBack() {
-  std::vector <std::string> names({"GUB0", "GUB14"});
+  std::vector<std::string> names({"GUB0", "GUB14"});
   RunChain(names, 1);
 }
 
-bool KernelGraph::ToPoint(const std::string& finish_name) {
-  std::vector <const Edge*> way;
+bool KernelGraph::ToPoint(const std::string &finish_name) {
+  std::vector<const Edge *> way;
 
   std::string start_name = GetNearestVertex(Vertex(GetCurrentState()))->GetName();
 
@@ -198,16 +197,15 @@ bool KernelGraph::ToPoint(const std::string& finish_name) {
   }
 }
 
-void KernelGraph::RunWayDimka(std::vector <const Edge*> edges, float acceleration) {
+void KernelGraph::RunWayDimka(std::vector<const Edge *> edges, float acceleration) {
   assert(acceleration > 0);
   if (edges.empty()) {
     return;
   }
 
-
   AL::ALValue angleLists;
   AL::ALValue timeLists;
-  std::vector <float> time_list;
+  std::vector<float> time_list;
   float curr_time = 0;
 
   for (int i = 0; i < edges.size(); ++i) {
@@ -215,17 +213,16 @@ void KernelGraph::RunWayDimka(std::vector <const Edge*> edges, float acceleratio
   }
 }
 
-void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {
+void KernelGraph::RunWay(std::vector<const Edge *> edges, float acceleration) {
   assert(acceleration > 0);
   if (edges.empty()) {
     return;
   }
 
-
   AL::ALValue angleLists;
   AL::ALValue timeLists;
-  std::vector <std::vector <float> > params_list;
-  std::vector <float> time_list;
+  std::vector<std::vector<float>> params_list;
+  std::vector<float> time_list;
   float curr_time = 0;
 
   for (int i = 0; i < edges.size(); ++i) {
@@ -234,9 +231,8 @@ void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {
     params_list.push_back(edges[i]->GetEnd()->GetRadianValues());
   }
 
-
   for (int i = 0; i < PARAM_NUM_; ++i) {
-    std::vector <float> joint_path;
+    std::vector<float> joint_path;
     for (int j = 0; j < params_list.size(); ++j) {
       float angle = params_list[j][i];
       joint_path.push_back(angle);
@@ -254,9 +250,9 @@ void KernelGraph::Rotate(float theta) const {
   theta = GetRealAngle(theta);
   float x_speed, y_speed, t_speed, time_rotate;
   time_rotate = fabs(theta / THETA_VELOCITY);
-  x_speed     = 0;
-  y_speed     = 0;
-  t_speed     = theta / time_rotate;
+  x_speed = 0;
+  y_speed = 0;
+  t_speed = theta / time_rotate;
 
   MoveParams params;
   params.SetParam("MaxStepFrequency", 1.0);
@@ -282,7 +278,7 @@ void KernelGraph::GoForwardFast(float len) const {
   float X_VELOCITY_ = 0.15;
 
   motion_.move(X_VELOCITY_, 0, 0, params.GetParams());
- }
+}
 
 void KernelGraph::GoBackFast(float len) const {
   assert(len >= 0);
@@ -298,7 +294,7 @@ void KernelGraph::GoBackFast(float len) const {
   float time_walk = len / X_VELOCITY_;
 
   motion_.move(-X_VELOCITY_, 0, 0, params.GetParams());
- }
+}
 
 void KernelGraph::GoLeftFast(float len) const {
   assert(len >= EPS);

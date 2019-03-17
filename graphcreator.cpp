@@ -2,10 +2,10 @@
 
 #include <alproxies/alsensorsproxy.h>
 
-GraphCreator::GraphCreator(boost::shared_ptr<AL::ALBroker> pBroker, const std::string& pName) :
-  ALModule(pBroker, pName),
-  graph_(pBroker),
-  vertex_buffer_(nullptr) {}
+GraphCreator::GraphCreator(boost::shared_ptr<AL::ALBroker> pBroker, const std::string &pName) :
+    ALModule(pBroker, pName),
+    graph_(pBroker),
+    vertex_buffer_(nullptr) {}
 
 GraphCreator::~GraphCreator() {
   ClearBuffer();
@@ -15,92 +15,64 @@ void GraphCreator::init() {
   // инициализируем граф
   graph_.Initialize();
 
-
   while (true) {
     std::string command(SmallLog("ENTER command", 1, true));
 
     if (command == "REST") {
       Rest();
-    }
-    else if (command == "WAKE") {
+    } else if (command == "WAKE") {
       Wake();
-    }
-    else if (command == "SNAP") {
+    } else if (command == "SNAP") {
       Snap();
-    }
-    else if (command == "B_OFF") {
+    } else if (command == "B_OFF") {
       BehaviorOff();
-    }
-    else if (command == "SET_NAME") {
+    } else if (command == "SET_NAME") {
       SetName();
-    }
-    else if (command == "RUN_B") {
+    } else if (command == "RUN_B") {
       RunBuffer();
-    }
-    else if (command == "REFL") {
+    } else if (command == "REFL") {
       Reflect();
-    }
-    else if (command == "LIKE_LEFT") {
+    } else if (command == "LIKE_LEFT") {
       CopyToRight();
-    }
-    else if (command == "LIKE_RIGHT") {
+    } else if (command == "LIKE_RIGHT") {
       CopyToLeft();
-    }
-    else if (command == "SAVE") {
+    } else if (command == "SAVE") {
       Save();
-    }
-    else if (command == "RUN") {
+    } else if (command == "RUN") {
       Run();
-    }
-    else if (command == "TEST") {
+    } else if (command == "TEST") {
       Test();
-    }
-    else if (command == "EXIT") {
+    } else if (command == "EXIT") {
       break;
-    }
-    else if (command == "MOVE") {
+    } else if (command == "MOVE") {
       Move();
-    }
-    else if (command == "MOVE_FAST") {
+    } else if (command == "MOVE_FAST") {
       MoveFast();
-    }
-    else if (command == "GO_FORWARD") {
+    } else if (command == "GO_FORWARD") {
       GoForward();
-    }
-    else if (command == "GO_BACK") {
+    } else if (command == "GO_BACK") {
       GoBack();
-    }
-    else if (command == "GO_LEFT") {
+    } else if (command == "GO_LEFT") {
       GoLeft();
-    }
-    else if (command == "GO_RIGHT") {
+    } else if (command == "GO_RIGHT") {
       GoRight();
-    }
-    else if (command == "START_MOVE") {
+    } else if (command == "START_MOVE") {
       StartMove();
-    }
-    else if (command == "STOP_MOVE") {
+    } else if (command == "STOP_MOVE") {
       StopMove();
-    }
-    else if (command == "ROTATE") {
+    } else if (command == "ROTATE") {
       Rotate();
-    }
-    else if (command == "HVA") {
+    } else if (command == "HVA") {
       SetHeadVerticalAngle();
-    }
-    else if (command == "HHA") {
+    } else if (command == "HHA") {
       SetHeadHorizontalAngle();
-    }
-    else if (command == "GUF") {
+    } else if (command == "GUF") {
       GetUpFront();
-    }
-    else if (command == "GUB") {
+    } else if (command == "GUB") {
       GetUpBack();
-    }
-    else if (command == "TO") {
+    } else if (command == "TO") {
       ToPoint();
-    }
-    else if (command == "dimka") {
+    } else if (command == "dimka") {
       AL::ALSensorsProxy pr;
       std::vector<std::string> output = pr.getOutputNames();
 
@@ -109,8 +81,7 @@ void GraphCreator::init() {
       for (int i = 0; i < output.size(); ++i) {
         std::cout << output[i] << std::endl;
       }
-    }
-    else {
+    } else {
       SmallLog("UNKNOWN COMMAND", 2);
     }
 
@@ -215,7 +186,6 @@ void GraphCreator::Save() {
 void GraphCreator::Run() {
   std::string v_name(SmallLog("ENTER Vertex Name:", 2, true));
 
-
   if (!graph_.Run(v_name)) {
     SmallLog("ERROR Cant run vertex " + v_name, 2);
     return;
@@ -224,8 +194,8 @@ void GraphCreator::Run() {
 
 void GraphCreator::Test() {
   int n, cnt, acc;
-  std::vector <const Edge*> way;
-  std::vector <std::string> path;
+  std::vector<const Edge *> way;
+  std::vector<std::string> path;
 
   n = SmallLog<int>("ENTER Len of chain:", 2, true);
 
@@ -250,8 +220,8 @@ void GraphCreator::Move() {
   float x, y, theta;
 
   SmallLog("Its a Move section insert x, y and Theta:", 2);
-  x     = SmallLog<float>("ENTER x in meters:", 2, true);
-  y     = SmallLog<float>("ENTER y in meters:", 2, true);
+  x = SmallLog<float>("ENTER x in meters:", 2, true);
+  y = SmallLog<float>("ENTER y in meters:", 2, true);
   theta = SmallLog<float>("ENTER Theta in Degree:", 2, true);
   graph_.Move(x, y, theta * TO_RAD);
 }
@@ -260,8 +230,8 @@ void GraphCreator::MoveFast() {
   float x, y, theta;
 
   SmallLog("Its a Move section insert x, y and Theta:", 2);
-  x     = SmallLog<float>("ENTER x in meters:", 2, true);
-  y     = SmallLog<float>("ENTER y in meters:", 2, true);
+  x = SmallLog<float>("ENTER x in meters:", 2, true);
+  y = SmallLog<float>("ENTER y in meters:", 2, true);
   theta = SmallLog<float>("ENTER Theta in Degree:", 2, true);
   graph_.MoveFast(x, y, theta * TO_RAD);
 }
@@ -354,7 +324,7 @@ bool GraphCreator::IsBufferEmpty() const {
   return vertex_buffer_ == nullptr;
 }
 
-void GraphCreator::SetBuffer(const Vertex& v) {
+void GraphCreator::SetBuffer(const Vertex &v) {
   vertex_buffer_ = new Vertex(v);
 }
 
@@ -362,7 +332,7 @@ void GraphCreator::ClearBuffer() {
   delete vertex_buffer_;
 }
 
-template <typename T>
+template<typename T>
 T GraphCreator::SmallLog(const std::string text, size_t deep_level, bool is_reply) const {
   std::string request = "";
   for (size_t i = 0; i < deep_level; ++i) {

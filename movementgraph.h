@@ -2,10 +2,9 @@
 
 #include "kernelgraph.h"
 
-
 class MovementGraph : public AL::ALModule {
  public:
-  MovementGraph(boost::shared_ptr<AL::ALBroker> pBroker, const std::string& pName);
+  MovementGraph(boost::shared_ptr<AL::ALBroker> pBroker, const std::string &pName);
   ~MovementGraph();
 
   virtual void init();
@@ -35,7 +34,7 @@ class MovementGraph : public AL::ALModule {
   void LookDown(int level);
 
   void ToInit();
-  
+
   void GetUpFront();
 
   void GetUpBack();

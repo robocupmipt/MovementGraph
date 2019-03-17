@@ -2,7 +2,7 @@
 
 class GraphCreator : public AL::ALModule {
  public:
-  GraphCreator(boost::shared_ptr<AL::ALBroker> pBroker, const std::string& pName);
+  GraphCreator(boost::shared_ptr<AL::ALBroker> pBroker, const std::string &pName);
 
   ~GraphCreator();
   virtual void init();
@@ -36,7 +36,7 @@ class GraphCreator : public AL::ALModule {
   void MoveFast();
 
   void GoForward();
-  
+
   void GoBack();
 
   void GoLeft();
@@ -64,14 +64,14 @@ class GraphCreator : public AL::ALModule {
 
   bool IsBufferEmpty() const;
 
-  void SetBuffer(const Vertex& v);
+  void SetBuffer(const Vertex &v);
 
   void ClearBuffer();
 
-  template <typename T=std::string>
-  T SmallLog(const std::string text, size_t deep_level, bool is_reply=false) const;
+  template<typename T=std::string>
+  T SmallLog(const std::string text, size_t deep_level, bool is_reply = false) const;
 
  private:
   KernelGraph graph_;
-  Vertex* vertex_buffer_;
+  Vertex *vertex_buffer_;
 };

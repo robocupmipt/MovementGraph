@@ -11,9 +11,8 @@
 #include <alproxies/alrobotpostureproxy.h>
 #include "primalgraph.h"
 
-namespace AL
-{
-  class ALBroker;
+namespace AL {
+class ALBroker;
 }
 
 class KernelGraph : public PrimalGraph {
@@ -22,13 +21,13 @@ class KernelGraph : public PrimalGraph {
 
   Vertex GetCurrentState() const;
 
-  bool RunChain(const std::vector <std::string>& chain,
+  bool RunChain(const std::vector<std::string> &chain,
                 int cnt,
                 float acceleration = DEFAULT_ACCELERATION);
 
-  bool Run(const std::string& v_name, float time = DEFAULT_TIME);
+  bool Run(const std::string &v_name, float time = DEFAULT_TIME);
 
-  void Run(const Vertex* v, float time = DEFAULT_TIME);
+  void Run(const Vertex *v, float time = DEFAULT_TIME);
 
   void Rest() const;
 
@@ -47,7 +46,7 @@ class KernelGraph : public PrimalGraph {
   void GoForwardFast(float len) const;
 
   void GoBackFast(float len) const;
-  
+
   void GoLeftFast(float len) const;
 
   void GoRightFast(float len) const;
@@ -77,12 +76,12 @@ class KernelGraph : public PrimalGraph {
   void LookDown(int level);
 
   // move position robot to finish via graph
-  bool ToPoint(const std::string& finish_name);
+  bool ToPoint(const std::string &finish_name);
  private:
 
-  void RunWay(std::vector <const Edge*> edges, float acceleration);
-  
-  void RunWayDimka(std::vector <const Edge*> edges, float acceleration);
+  void RunWay(std::vector<const Edge *> edges, float acceleration);
+
+  void RunWayDimka(std::vector<const Edge *> edges, float acceleration);
 
   float GetRealAngle(float theta) const;
 
