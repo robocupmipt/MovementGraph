@@ -349,7 +349,7 @@ void KernelGraph::GoLeftFast(float len) const {
 
   motion_.setMoveArmsEnabled(true, true);
 
-  float Y_VELOCITY_ = 0.07;
+  float Y_VELOCITY_ = 0.065;
 
   motion_.move(0, Y_VELOCITY_, 0, params.GetParams());
 }
