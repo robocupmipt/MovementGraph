@@ -1,189 +1,189 @@
 0 {
-	HeadYaw : (0.0, 1)
-	HeadPitch : (0.0, 1)
-	LShoulderPitch : (30.0, 1)
-	LShoulderRoll : (0.0, 1)
-	LElbowYaw : (0.0, 1)
-	LElbowRoll : (0.0, 1)
+	HeadYaw : 0.0 1
+	HeadPitch : 0.0 1
+	LShoulderPitch : 30.0 1
+	LShoulderRoll : 0.0 1
+	LElbowYaw : 0.0 1
+	LElbowRoll : 0.0 1
 	LWristYaw : 0
-	RShoulderPitch : (30.0, 1)
-	RShoulderRoll : (0.0, 1)
-	RElbowYaw : (0.0, 1)
-	RElbowRoll : (0.0, 1)
+	RShoulderPitch : 30.0 1
+	RShoulderRoll : 0.0 1
+	RElbowYaw : 0.0 1
+	RElbowRoll : 0.0 1
 	RWristYaw : 0
-	LHipYawPitch : (0.0, 1)
-	LHipRoll : (0.0, 1)
-	LHipPitch : (-30.0, 1)
-	LKneePitch : (60.0, 1)
-	LAnklePitch : (-30.0, 1)
-	LAnkleRoll : (0.0, 1)
-	RHipYawPitch : (0.0, 1)
-	RHipRoll : (0.0, 1)
-	RHipPitch : (-30.0, 1)
-	RKneePitch : (60.0, 1)
-	RAnklePitch : (-30.0, 1)
-	RAnkleRoll : (0.0, 1)
+	LHipYawPitch : 0.0 1
+	LHipRoll : 0.0 1
+	LHipPitch : -30.0 1
+	LKneePitch : 60.0 1
+	LAnklePitch : -30.0 1
+	LAnkleRoll : 0.0 1
+	RHipYawPitch : 0.0 1
+	RHipRoll : 0.0 1
+	RHipPitch : -30.0 1
+	RKneePitch : 60.0 1
+	RAnklePitch : -30.0 1
+	RAnkleRoll : 0.0 1
 
 }
 1 {
-	HeadYaw : (0.0, 1)
-	HeadPitch : (0.0, 1)
-	LShoulderPitch : (30.0, 1)
-	LShoulderRoll : (0.0, 1)
-	LElbowYaw : (0.0, 1)
-	LElbowRoll : (0.0, 1)
+	HeadYaw : 0.0 1
+	HeadPitch : 0.0 1
+	LShoulderPitch : 30.0 1
+	LShoulderRoll : 0.0 1
+	LElbowYaw : 0.0 1
+	LElbowRoll : 0.0 1
 	LWristYaw : 0
-	RShoulderPitch : (30.0, 1)
-	RShoulderRoll : (0.0, 1)
-	RElbowYaw : (0.0, 1)
-	RElbowRoll : (0.0, 1)
+	RShoulderPitch : 30.0 1
+	RShoulderRoll : 0.0 1
+	RElbowYaw : 0.0 1
+	RElbowRoll : 0.0 1
 	RWristYaw : 0
-	LHipYawPitch : (0.0, 1)
-	LHipRoll : (22.0, 1)
-	LHipPitch : (-30.0, 1)
-	LKneePitch : (60.0, 1)
-	LAnklePitch : (-30.0, 1)
-	LAnkleRoll : (-22.0, 1)
-	RHipYawPitch : (0.0, 1)
-	RHipRoll : (22.0, 1)
-	RHipPitch : (-30.0, 1)
-	RKneePitch : (60.0, 1)
-	RAnklePitch : (-30.0, 1)
-	RAnkleRoll : (-22.0, 1)
+	LHipYawPitch : 0.0 1
+	LHipRoll : 22.0 1
+	LHipPitch : -30.0 1
+	LKneePitch : 60.0 1
+	LAnklePitch : -30.0 1
+	LAnkleRoll : -22.0 1
+	RHipYawPitch : 0.0 1
+	RHipRoll : 22.0 1
+	RHipPitch : -30.0 1
+	RKneePitch : 60.0 1
+	RAnklePitch : -30.0 1
+	RAnkleRoll : -22.0 1
 
 }
 2 {
-	HeadYaw : (0.0, 1)
-	HeadPitch : (0.0, 1)
-	LShoulderPitch : (30.0, 1)
-	LShoulderRoll : (0.0, 1)
-	LElbowYaw : (0.0, 1)
-	LElbowRoll : (0.0, 1)
+	HeadYaw : 0.0 1
+	HeadPitch : 0.0 1
+	LShoulderPitch : 30.0 1
+	LShoulderRoll : 0.0 1
+	LElbowYaw : 0.0 1
+	LElbowRoll : 0.0 1
 	LWristYaw : 0
-	RShoulderPitch : (30.0, 1)
-	RShoulderRoll : (0.0, 1)
-	RElbowYaw : (0.0, 1)
-	RElbowRoll : (0.0, 1)
+	RShoulderPitch : 30.0 1
+	RShoulderRoll : 0.0 1
+	RElbowYaw : 0.0 1
+	RElbowRoll : 0.0 1
 	RWristYaw : 0
-	LHipYawPitch : (0.0, 1)
-	LHipRoll : (22.0, 1)
-	LHipPitch : (-30.0, 1)
-	LKneePitch : (60.0, 1)
-	LAnklePitch : (-30.0, 1)
-	LAnkleRoll : (-22.0, 1)
-	RHipYawPitch : (0.0, 1)
-	RHipRoll : (22.0, 1)
-	RHipPitch : (-30.0, 1)
-	RKneePitch : (20.0, 1)
-	RAnklePitch : (-10.0, 1)
-	RAnkleRoll : (-22.0, 1)
+	LHipYawPitch : 0.0 1
+	LHipRoll : 22.0 1
+	LHipPitch : -30.0 1
+	LKneePitch : 60.0 1
+	LAnklePitch : -30.0 1
+	LAnkleRoll : -22.0 1
+	RHipYawPitch : 0.0 1
+	RHipRoll : 22.0 1
+	RHipPitch : -30.0 1
+	RKneePitch : 20.0 1
+	RAnklePitch : -10.0 1
+	RAnkleRoll : -22.0 1
 
 }
 3 {
-	HeadYaw : (0.0, 1)
-	HeadPitch : (0.0, 1)
-	LShoulderPitch : (30.0, 1)
-	LShoulderRoll : (0.0, 1)
-	LElbowYaw : (0.0, 1)
-	LElbowRoll : (0.0, 1)
+	HeadYaw : 0.0 1
+	HeadPitch : 0.0 1
+	LShoulderPitch : 30.0 1
+	LShoulderRoll : 0.0 1
+	LElbowYaw : 0.0 1
+	LElbowRoll : 0.0 1
 	LWristYaw : 0
-	RShoulderPitch : (30.0, 1)
-	RShoulderRoll : (0.0, 1)
-	RElbowYaw : (0.0, 1)
-	RElbowRoll : (0.0, 1)
+	RShoulderPitch : 30.0 1
+	RShoulderRoll : 0.0 1
+	RElbowYaw : 0.0 1
+	RElbowRoll : 0.0 1
 	RWristYaw : 0
-	LHipYawPitch : (0.0, 1)
-	LHipRoll : (22.0, 1)
-	LHipPitch : (22.0, 1)
-	LKneePitch : (130.0, 1)
-	LAnklePitch : (-30.0, 1)
-	LAnkleRoll : (-22.0, 1)
-	RHipYawPitch : (0.0, 1)
-	RHipRoll : (22.0, 1)
-	RHipPitch : (-30.0, 1)
-	RKneePitch : (20.0, 1)
-	RAnklePitch : (-10.0, 1)
-	RAnkleRoll : (-22.0, 1)
+	LHipYawPitch : 0.0 1
+	LHipRoll : 22.0 1
+	LHipPitch : 22.0 1
+	LKneePitch : 130.0 1
+	LAnklePitch : -30.0 1
+	LAnkleRoll : -22.0 1
+	RHipYawPitch : 0.0 1
+	RHipRoll : 22.0 1
+	RHipPitch : -30.0 1
+	RKneePitch : 20.0 1
+	RAnklePitch : -10.0 1
+	RAnkleRoll : -22.0 1
 
 }
 4 {
-	HeadYaw : (0.0, 1)
-	HeadPitch : (0.0, 1)
-	LShoulderPitch : (30.0, 1)
-	LShoulderRoll : (0.0, 1)
-	LElbowYaw : (0.0, 1)
-	LElbowRoll : (0.0, 1)
+	HeadYaw : 0.0 1
+	HeadPitch : 0.0 1
+	LShoulderPitch : 30.0 1
+	LShoulderRoll : 0.0 1
+	LElbowYaw : 0.0 1
+	LElbowRoll : 0.0 1
 	LWristYaw : 0
-	RShoulderPitch : (30.0, 1)
-	RShoulderRoll : (0.0, 1)
-	RElbowYaw : (0.0, 1)
-	RElbowRoll : (0.0, 1)
+	RShoulderPitch : 30.0 1
+	RShoulderRoll : 0.0 1
+	RElbowYaw : 0.0 1
+	RElbowRoll : 0.0 1
 	RWristYaw : 0
-	LHipYawPitch : (0.0, 1)
-	LHipRoll : (22.0, 1)
-	LHipPitch : (-60.0, 1)
-	LKneePitch : (70.0, 1)
-	LAnklePitch : (-30.0, 1)
-	LAnkleRoll : (-22.0, 1)
-	RHipYawPitch : (0.0, 1)
-	RHipRoll : (22.0, 1)
-	RHipPitch : (25.0, 1)
-	RKneePitch : (0.0, 1)
-	RAnklePitch : (-5.0, 1)
-	RAnkleRoll : (-22.0, 1)
+	LHipYawPitch : 0.0 1
+	LHipRoll : 22.0 1
+	LHipPitch : -60.0 1
+	LKneePitch : 70.0 1
+	LAnklePitch : -30.0 1
+	LAnkleRoll : -22.0 1
+	RHipYawPitch : 0.0 1
+	RHipRoll : 22.0 1
+	RHipPitch : 25.0 1
+	RKneePitch : 0.0 1
+	RAnklePitch : -5.0 1
+	RAnkleRoll : -22.0 1
 
 }
 5 {
-	HeadYaw : (0.0, 1)
-	HeadPitch : (0.0, 1)
-	LShoulderPitch : (30.0, 1)
-	LShoulderRoll : (0.0, 1)
-	LElbowYaw : (0.0, 1)
-	LElbowRoll : (0.0, 1)
+	HeadYaw : 0.0 1
+	HeadPitch : 0.0 1
+	LShoulderPitch : 30.0 1
+	LShoulderRoll : 0.0 1
+	LElbowYaw : 0.0 1
+	LElbowRoll : 0.0 1
 	LWristYaw : 0
-	RShoulderPitch : (30.0, 1)
-	RShoulderRoll : (0.0, 1)
-	RElbowYaw : (0.0, 1)
-	RElbowRoll : (0.0, 1)
+	RShoulderPitch : 30.0 1
+	RShoulderRoll : 0.0 1
+	RElbowYaw : 0.0 1
+	RElbowRoll : 0.0 1
 	RWristYaw : 0
-	LHipYawPitch : (0.0, 1)
-	LHipRoll : (22.0, 1)
-	LHipPitch : (-25.0, 1)
-	LKneePitch : (70.0, 1)
-	LAnklePitch : (-30.0, 1)
-	LAnkleRoll : (-22.0, 1)
-	RHipYawPitch : (0.0, 1)
-	RHipRoll : (22.0, 1)
-	RHipPitch : (0.0, 1)
-	RKneePitch : (0.0, 1)
-	RAnklePitch : (-5.0, 1)
-	RAnkleRoll : (-22.0, 1)
+	LHipYawPitch : 0.0 1
+	LHipRoll : 22.0 1
+	LHipPitch : -25.0 1
+	LKneePitch : 70.0 1
+	LAnklePitch : -30.0 1
+	LAnkleRoll : -22.0 1
+	RHipYawPitch : 0.0 1
+	RHipRoll : 22.0 1
+	RHipPitch : 0.0 1
+	RKneePitch : 0.0 1
+	RAnklePitch : -5.0 1
+	RAnkleRoll : -22.0 1
 
 }
 6 {
-	HeadYaw : (0.0, 1)
-	HeadPitch : (0.0, 1)
-	LShoulderPitch : (90.0, 1)
-	LShoulderRoll : (30.0, 1)
-	LElbowYaw : (0.0, 1)
-	LElbowRoll : (0.0, 1)
+	HeadYaw : 0.0 1
+	HeadPitch : 0.0 1
+	LShoulderPitch : 90.0 1
+	LShoulderRoll : 30.0 1
+	LElbowYaw : 0.0 1
+	LElbowRoll : 0.0 1
 	LWristYaw : 0
-	RShoulderPitch : (90.0, 1)
-	RShoulderRoll : (-30.0, 1)
-	RElbowYaw : (0.0, 1)
-	RElbowRoll : (0.0, 1)
+	RShoulderPitch : 90.0 1
+	RShoulderRoll : -30.0 1
+	RElbowYaw : 0.0 1
+	RElbowRoll : 0.0 1
 	RWristYaw : 0
-	LHipYawPitch : (0.0, 1)
-	LHipRoll : (0.0, 1)
-	LHipPitch : (-30.0, 1)
-	LKneePitch : (60.0, 1)
-	LAnklePitch : (-30.0, 1)
-	LAnkleRoll : (0.0, 1)
-	RHipYawPitch : (0.0, 1)
-	RHipRoll : (0.0, 1)
-	RHipPitch : (-30.0, 1)
-	RKneePitch : (60.0, 1)
-	RAnklePitch : (-30.0, 1)
-	RAnkleRoll : (0.0, 1)
+	LHipYawPitch : 0.0 1
+	LHipRoll : 0.0 1
+	LHipPitch : -30.0 1
+	LKneePitch : 60.0 1
+	LAnklePitch : -30.0 1
+	LAnkleRoll : 0.0 1
+	RHipYawPitch : 0.0 1
+	RHipRoll : 0.0 1
+	RHipPitch : -30.0 1
+	RKneePitch : 60.0 1
+	RAnklePitch : -30.0 1
+	RAnkleRoll : 0.0 1
 
 }

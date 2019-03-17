@@ -67,7 +67,7 @@ def toVertex(position, hardnesses, output, name) :
         ind  = mapForTranslateToInt[mapForTranslateToString[i]]
         pos  = position[ind]
         hard = hardnesses[ind]
-        writeJson[i] = (pos, hard)
+        writeJson[i] = "%s %s" % (str(pos), str(hard))
 
     printJson(writeJson, output, name)
 
