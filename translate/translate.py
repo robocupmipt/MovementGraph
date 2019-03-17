@@ -44,7 +44,7 @@ def printJson(json, output, name) :
 
     output.write(out % (name, params))
 
-def toVertex(position, output, name) :
+def toVertex(position, hardnesses, output, name) :
     if output is None:
         output = "translate_" + input
     
@@ -64,40 +64,57 @@ def toVertex(position, output, name) :
             writeJson[i] = 0
             continue
 
-        writeJson[i] = position[mapForTranslateToInt[mapForTranslateToString[i]]]
+        ind  = mapForTranslateToInt[mapForTranslateToString[i]]
+        pos  = position[ind]
+        hard = hardnesses[ind]
+        writeJson[i] = "%s %s" % (str(pos), str(hard))
 
     printJson(writeJson, output, name)
 
 def translate(input, output):
     with open(input) as file:
-        positions = []
-        numString = 0
+        numString  = 0
+        positions  = []
+        hardnesses = []
+        hardness   = []
         for line in file :
             position  = []
+            parse = []
             line = re.sub('\n', '', line)
             split   = line.split(' ')
             for i in split :
                 i.strip()
                 if (i != '') :
-                    position.append(i)
+                    parse.append(i)
             
+
             if numString == 0 :
                 numPosition = -1
-                for i in position :
+                for i in parse :
                     mapForTranslateToInt[i] = numPosition
                     numPosition += 1
 
-            if len(position) > 0 and not('#' in position[0]) and not ('$' in position[0]) :
+            if len(parse) == 0 or ('#' in parse[0]) :
+                continue 
+
+            if not('$' in parse[0]) :
+                position = [float(i) for i in parse]
                 positions.append(position)
+                if hardness  == [] :
+                    hardness = [1] * len(position)
+                hardnesses.append(hardness)
+            else :
+                parse    = parse[1:]
+                hardness = [float(i) for i in parse]
+                
             numString += 1
 
 
         with open(output, 'w', encoding='utf-8') as fileOutput:
-            ind = 0
-            for position in positions :
-                toVertex(position, fileOutput, str(ind))
-                ind += 1
 
+            for ind in range(len(positions)) :
+                toVertex(positions[ind], hardnesses[ind], fileOutput, str(ind))
+            
 
 
 if __name__ == '__main__':
