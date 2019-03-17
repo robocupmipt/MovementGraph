@@ -119,7 +119,7 @@ void KernelGraph::MoveFast(float x, float y, float theta) {
   }
 }
 
-void KernelGraph::SetTheta(float theta, float len) const {
+void KernelGraph::SetTheta(float theta, float len) {
   StopMove();
 
   Rotate(theta);
@@ -244,8 +244,11 @@ void KernelGraph::RunWay(std::vector<const Edge *> edges, float acceleration) {
   motion_.angleInterpolationBezier(PARAM_NAMES, timeLists, angleLists);
 }
 
-void KernelGraph::Rotate(float theta) const {
+void KernelGraph::Rotate(float theta) {
   assert(fabs(theta) <= PI);
+
+  float time = 1;
+  Run("INIT", time);
 
   theta = GetRealAngle(theta);
   float x_speed, y_speed, t_speed, time_rotate;
@@ -265,8 +268,11 @@ void KernelGraph::Rotate(float theta) const {
   motion_.stopMove();
 }
 
-void KernelGraph::GoForwardFast(float len) const {
+void KernelGraph::GoForwardFast(float len) {
   assert(len >= 0);
+
+  float time = 1;
+  Run("INIT", time);
 
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
@@ -280,8 +286,11 @@ void KernelGraph::GoForwardFast(float len) const {
   motion_.move(X_VELOCITY_, 0, 0, params.GetParams());
 }
 
-void KernelGraph::GoBackFast(float len) const {
+void KernelGraph::GoBackFast(float len) {
   assert(len >= 0);
+
+  float time = 1;
+  Run("INIT", time);
 
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
@@ -296,8 +305,11 @@ void KernelGraph::GoBackFast(float len) const {
   motion_.move(-X_VELOCITY_, 0, 0, params.GetParams());
 }
 
-void KernelGraph::GoLeftFast(float len) const {
+void KernelGraph::GoLeftFast(float len) {
   assert(len >= EPS);
+
+  float time = 1;
+  Run("INIT", time);
 
   MoveParams params;
   params.SetParam("StepHeight", 0.027);
@@ -310,8 +322,11 @@ void KernelGraph::GoLeftFast(float len) const {
   motion_.move(0, Y_VELOCITY_, 0, params.GetParams());
 }
 
-void KernelGraph::GoRightFast(float len) const {
+void KernelGraph::GoRightFast(float len) {
   assert(len >= EPS);
+
+  float time = 1;
+  Run("INIT", time);
 
   MoveParams params;
   params.SetParam("StepHeight", 0.027);
