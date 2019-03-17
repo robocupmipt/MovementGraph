@@ -53,8 +53,6 @@ class GraphCreator : public AL::ALModule {
 
   void SetHeadHorizontalAngle();
 
-  void Fun();
-
   void GetUpFront();
 
   void GetUpBack();

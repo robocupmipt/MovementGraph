@@ -150,12 +150,6 @@ void KernelGraph::LeftKick() {
 
 // end copy
 
-
-void KernelGraph::Fun() {
-  boost::shared_ptr<AL::ALProxy> testProxy
-      = boost::shared_ptr<AL::ALProxy>(new AL::ALProxy(broker_, "MovementGraph"));
-}
-
 float KernelGraph::GetHeadVerticalAngle() {
   Vertex curr = GetCurrentState();
   return -curr.GetDegreesValues()[1];
@@ -204,7 +198,7 @@ void KernelGraph::GetUpBack() {
   RunChain(names, 1);
 }
 
-/*------- PRIVAT SPACE ---------*/
+/*------- PRIVATE SPACE ---------*/
 
 bool KernelGraph::ToPoint(const std::string& finish_name) {
   std::vector <const Edge*> way;
@@ -301,13 +295,6 @@ void KernelGraph::GoForward(float len) const {
   params.SetParam("MaxStepX", 0.06);
   params.SetParam("StepHeight", 0.027);
   params.SetParam("TorsoWy", 0.01);
-  /*
-  params.SetParam("MaxStepFrequency", 0.0);
-
-  params.SetParam("TorsoWy", 0.12);
-
-
-  */
 
   float counting_len = len;
   motion_.setMoveArmsEnabled(true, true);
@@ -331,21 +318,6 @@ void KernelGraph::GoForvardFast(float len) const {
   params.SetParam("StepHeight", 0.027);
   params.SetParam("TorsoWy", 0.01);
 
-/*
-  posture_.goToPosture("StandInit", 0.5);
-
-  MoveParams params;
-  params.SetParam("MaxStepX", 0.08);
-  params.SetParam("StepHeight", 0.035);
-  params.SetParam("TorsoWy", 0.0122);
-*/
-
-  /*
-  params.SetParam("MaxStepFrequency", 0.0);
-
-  params.SetParam("TorsoWy", 0.12);
-  */
-
   motion_.setMoveArmsEnabled(true, true);
 
   float X_VELOCITY_ = 0.1;
@@ -361,21 +333,6 @@ void KernelGraph::GoBackFast(float len) const {
   params.SetParam("MaxStepX", 0.06);
   params.SetParam("StepHeight", 0.027);
   params.SetParam("TorsoWy", 0.01);
-
-/*
-  posture_.goToPosture("StandInit", 0.5);
-
-  MoveParams params;
-  params.SetParam("MaxStepX", 0.08);
-  params.SetParam("StepHeight", 0.035);
-  params.SetParam("TorsoWy", 0.0122);
-*/
-
-  /*
-  params.SetParam("MaxStepFrequency", 0.0);
-
-  params.SetParam("TorsoWy", 0.12);
-  */
 
   motion_.setMoveArmsEnabled(true, true);
 

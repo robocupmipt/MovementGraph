@@ -91,9 +91,6 @@ void GraphCreator::init() {
     else if (command == "HHA") {
       SetHeadHorizontalAngle();
     }
-    else if (command == "FUN") {
-      Fun();
-    }
     else if (command == "GUF") {
       GetUpFront();
     }
@@ -320,10 +317,6 @@ void GraphCreator::SetHeadVerticalAngle() {
 void GraphCreator::SetHeadHorizontalAngle() {
   float angle = SmallLog<float>("Enter angle from right(-119.5) to left(119.5)", 2, true);
   graph_.SetHeadHorizontalAngle(angle);
-}
-
-void GraphCreator::Fun() {
-  graph_.Fun();
 }
 
 void GraphCreator::GetUpFront() {
