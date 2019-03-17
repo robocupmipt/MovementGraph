@@ -88,8 +88,6 @@ class KernelGraph : public PrimalGraph {
   
   void RunWayDimka(std::vector <const Edge*> edges, float acceleration);
 
-  void GoForward(float len) const;
-
   float GetRealAngle(float theta) const;
 
  private:

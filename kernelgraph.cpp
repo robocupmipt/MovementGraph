@@ -94,7 +94,7 @@ void KernelGraph::Move(float x, float y, float theta) {
 
   if (len > EPS) {
     Rotate(first_rotate);
-    GoForward(len);
+    GoForwardFast(len);
     Rotate(second_rotate);
   } else {
     Rotate(theta);
@@ -280,30 +280,6 @@ void KernelGraph::Rotate(float theta) const {
   motion_.move(x_speed, y_speed, t_speed, params.GetParams());
   sleep(time_rotate);
   motion_.stopMove();
-}
-
-void KernelGraph::GoForward(float len) const {
-  assert(len >= 0);
-
-  posture_.goToPosture("StandInit", 0.5);
-
-  MoveParams params;
-  params.SetParam("MaxStepX", 0.06);
-  params.SetParam("StepHeight", 0.027);
-  params.SetParam("TorsoWy", 0.01);
-
-  float counting_len = len;
-  motion_.setMoveArmsEnabled(true, true);
-  while (counting_len > EPS) {
-    float curr_len = std::min(counting_len, STEP_CHAIN);
-    float time_walk = curr_len / X_VELOCITY;
-
-    motion_.move(X_VELOCITY, 0, 0, params.GetParams());
-    sleep(time_walk);
-    motion_.stopMove();
-    counting_len -= curr_len;
-  }
-  motion_.setMoveArmsEnabled(false, false);
 }
 
 void KernelGraph::GoForwardFast(float len) const {
