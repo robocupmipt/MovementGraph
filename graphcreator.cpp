@@ -55,12 +55,6 @@ void GraphCreator::init() {
     else if (command == "TEST") {
       Test();
     }
-    else if (command == "RKICK") {
-      RKick();
-    }
-    else if (command == "LKICK") {
-      LKick();
-    }
     else if (command == "EXIT") {
       break;
     }
@@ -250,15 +244,6 @@ void GraphCreator::Test() {
     SmallLog("ERROR Cant run chain", 2);
     return;
   }
-}
-
-void GraphCreator::RKick() {
-  graph_.RightKick();
-}
-
-void GraphCreator::LKick() {
-
-  graph_.LeftKick();
 }
 
 void GraphCreator::Move() {

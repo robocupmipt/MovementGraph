@@ -108,14 +108,6 @@ void MovementGraph::SetTheta(float theta, float len) {
   graph_.SetTheta(theta, len);
 }
 
-void MovementGraph::RightKick() {
-  graph_.RightKick();
-}
-
-void MovementGraph::LeftKick() {
-  graph_.LeftKick();
-}
-
 float MovementGraph::GetHeadVerticalAngle() {
   graph_.GetHeadVerticalAngle();
 }

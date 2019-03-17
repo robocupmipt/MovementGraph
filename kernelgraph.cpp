@@ -118,9 +118,7 @@ void KernelGraph::MoveFast(float x, float y, float theta) {
   if (second_rotate > EPS) {
     Rotate(second_rotate);
   }
-  //posture_.goToPosture("StandInit", 0.5);
 }
-
 
 void KernelGraph::SetTheta(float theta, float len) const {
   StopMove();
@@ -138,17 +136,6 @@ void KernelGraph::StopMove() const {
 void KernelGraph::StartMove() const {
   posture_.goToPosture("StandInit", 0.5);
 }
-
-
-void KernelGraph::RightKick() {
-
-}
-
-
-void KernelGraph::LeftKick() {
-}
-
-// end copy
 
 float KernelGraph::GetHeadVerticalAngle() {
   Vertex curr = GetCurrentState();
@@ -341,7 +328,6 @@ void KernelGraph::GoRightFast(float len) const {
   motion_.move(0, -Y_VELOCITY_, 0, params.GetParams());
 }
 
-//wtf
 float KernelGraph::GetRealAngle(float theta) const {
   float sign = (theta < 0) ? -1 : 1;
   float new_theta = (fabs(theta) + 30 * TO_RAD) * 9 / 10;

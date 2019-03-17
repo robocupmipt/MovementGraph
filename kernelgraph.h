@@ -60,10 +60,6 @@ class KernelGraph : public PrimalGraph {
 
   void SetTheta(float theta, float len) const; // dont exists
 
-  void RightKick(); // dont exists
-
-  void LeftKick(); // dont exists
-
   void GetUpFront();
 
   void GetUpBack();

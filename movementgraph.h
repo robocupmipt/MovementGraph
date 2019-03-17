@@ -24,10 +24,6 @@ class MovementGraph : public AL::ALModule {
 
   void SetTheta(float theta, float len);
 
-  void RightKick();
-
-  void LeftKick();
-
   float GetHeadVerticalAngle();
 
   float GetHeadHorizontalAngle();
