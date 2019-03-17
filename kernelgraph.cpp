@@ -264,8 +264,6 @@ void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {
 void KernelGraph::Rotate(float theta) const {
   assert(fabs(theta) <= PI);
 
-  posture_.goToPosture("StandInit", 0.5);
-
   theta = GetRealAngle(theta);
   float x_speed, y_speed, t_speed, time_rotate;
   time_rotate = fabs(theta / THETA_VELOCITY);
@@ -311,8 +309,6 @@ void KernelGraph::GoForward(float len) const {
 void KernelGraph::GoForwardFast(float len) const {
   assert(len >= 0);
 
-  posture_.goToPosture("StandInit", 0.5);
-
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
   params.SetParam("StepHeight", 0.027);
@@ -327,8 +323,6 @@ void KernelGraph::GoForwardFast(float len) const {
 
 void KernelGraph::GoBackFast(float len) const {
   assert(len >= 0);
-
-  posture_.goToPosture("StandInit", 0.5);
 
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
@@ -346,8 +340,6 @@ void KernelGraph::GoBackFast(float len) const {
 void KernelGraph::GoLeftFast(float len) const {
   assert(len >= EPS);
 
-  posture_.goToPosture("StandInit", 0.5);
-
   MoveParams params;
   params.SetParam("StepHeight", 0.027);
   params.SetParam("TorsoWy", 0.1);
@@ -361,8 +353,6 @@ void KernelGraph::GoLeftFast(float len) const {
 
 void KernelGraph::GoRightFast(float len) const {
   assert(len >= EPS);
-
-  posture_.goToPosture("StandInit", 0.5);
 
   MoveParams params;
   params.SetParam("StepHeight", 0.027);

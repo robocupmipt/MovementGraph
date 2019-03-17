@@ -317,8 +317,8 @@ void GraphCreator::Rotate() {
   float theta;
 
   SmallLog("Its a Rotate section insert len:", 2);
-  theta = SmallLog<float>("ENTER theta in radians:", 2, true);
-  graph_.Rotate(theta);
+  theta = SmallLog<float>("ENTER theta in degree:", 2, true);
+  graph_.Rotate(theta * TO_RAD);
 }
 
 void GraphCreator::StartMove() {
