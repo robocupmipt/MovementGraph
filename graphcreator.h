@@ -39,7 +39,7 @@ class GraphCreator : public AL::ALModule {
 
   void MoveFast();
 
-  void GoForvard();
+  void GoForward();
   
   void GoBack();
 

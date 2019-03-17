@@ -70,8 +70,8 @@ void GraphCreator::init() {
     else if (command == "MOVE_FAST") {
       MoveFast();
     }
-    else if (command == "GO_FORVARD") {
-      GoForvard();
+    else if (command == "GO_FORWARD") {
+      GoForward();
     }
     else if (command == "GO_BACK") {
       GoBack();
@@ -275,12 +275,12 @@ void GraphCreator::MoveFast() {
   graph_.MoveFast(x, y, theta * TO_RAD);
 }
 
-void GraphCreator::GoForvard() {
+void GraphCreator::GoForward() {
   float len;
 
-  SmallLog("Its a Go_Forvard section insert len:", 2);
+  SmallLog("Its a Go_Forward section insert len:", 2);
   len = SmallLog<float>("ENTER len in meters:", 2, true);
-  graph_.GoForvardFast(len);
+  graph_.GoForwardFast(len);
 }
 
 void GraphCreator::GoBack() {
@@ -295,7 +295,7 @@ void GraphCreator::Rotate() {
   float theta;
 
   SmallLog("Its a Rotate section insert len:", 2);
-  theta = SmallLog<float>("ENTER theta in meters:", 2, true);
+  theta = SmallLog<float>("ENTER theta in radians:", 2, true);
   graph_.Rotate(theta);
 }
 

@@ -113,7 +113,7 @@ void KernelGraph::MoveFast(float x, float y, float theta) {
     Rotate(first_rotate);
   }
   if (len > EPS) {
-    GoForvardFast(len);
+    GoForwardFast(len);
   } 
   if (second_rotate > EPS) {
     Rotate(second_rotate);
@@ -127,7 +127,7 @@ void KernelGraph::SetTheta(float theta, float len) const {
 
   Rotate(theta);
 
-  GoForvardFast(len);
+  GoForwardFast(len);
 }
 
 void KernelGraph::StopMove() const {
@@ -310,7 +310,7 @@ void KernelGraph::GoForward(float len) const {
   motion_.setMoveArmsEnabled(false, false);
 }
 
-void KernelGraph::GoForvardFast(float len) const {
+void KernelGraph::GoForwardFast(float len) const {
   assert(len >= 0);
   
   MoveParams params;

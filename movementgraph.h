@@ -12,7 +12,7 @@ class MovementGraph : public AL::ALModule {
 
   void Move(float x, float y, float theta);
 
-  void GoForvard(float len);
+  void GoForward(float len);
 
   void GoBack(float len);
 

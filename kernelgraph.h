@@ -44,7 +44,7 @@ class KernelGraph : public PrimalGraph {
 
   void MoveFast(float x, float y, float theta);
 
-  void GoForvardFast(float len) const;
+  void GoForwardFast(float len) const;
 
   void GoBackFast(float len) const;
 

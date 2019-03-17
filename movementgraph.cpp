@@ -17,9 +17,9 @@ MovementGraph::MovementGraph(boost::shared_ptr<ALBroker> broker, const std::stri
   addParam("theta", "Its a rotate angle from start position");
   BIND_METHOD(MovementGraph::Move);
 
-  functionName("GoForvard", getName(), "move robot forvard");
-  addParam("len", "displacement to the forvard in meters. Negative value is wrong.");
-  BIND_METHOD(MovementGraph::GoForvard);
+  functionName("GoForward", getName(), "move robot forward");
+  addParam("len", "displacement to the forward in meters. Negative value is wrong.");
+  BIND_METHOD(MovementGraph::GoForward);
 
   functionName("GoBack", getName(), "move robot back");
   addParam("len", "displacement to the back in meters. Negative value is wrong.");
@@ -84,8 +84,8 @@ void MovementGraph::Move(float x, float y, float theta) {
   graph_.Move(x, y, theta);
 }
 
-void MovementGraph::GoForvard(float len) {
-  graph_.GoForvardFast(len);
+void MovementGraph::GoForward(float len) {
+  graph_.GoForwardFast(len);
 }
 
 void MovementGraph::GoBack(float len) {
@@ -93,7 +93,7 @@ void MovementGraph::GoBack(float len) {
 }
 
 void MovementGraph::Rotate(float theta) {
-  graph_.GoForvardFast(theta);
+  graph_.Rotate(theta);
 }
 
 void MovementGraph::StopMove() {
