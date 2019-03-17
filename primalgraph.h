@@ -14,7 +14,7 @@ class PrimalGraph {
 
   const Vertex* GetVertex(const std::string& name) const;
 
-  const Vertex* GetNearestVertex(Vertex* v) const;
+  const Vertex* GetNearestVertex(const Vertex& v) const;
 
   bool FindWayToVertexFromVertex(const std::string& start,
                                  const std::string& finish,

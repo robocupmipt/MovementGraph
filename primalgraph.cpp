@@ -60,14 +60,14 @@ const Vertex* PrimalGraph::GetVertex(const std::string& name) const {
   return &vertexes_[ind];
 }
 
-const Vertex* PrimalGraph::GetNearestVertex(Vertex* v) const {
+const Vertex* PrimalGraph::GetNearestVertex(const Vertex& v) const {
   assert(!vertexes_.empty());
 
   int min_index = 0;
-  float min = v->Dist(vertexes_[0]);
+  float min = v.Dist(vertexes_[0]);
 
   for (int i = 1; i < vertexes_.size(); i++) {
-    float metrics = v->Dist(vertexes_[i]);
+    float metrics = v.Dist(vertexes_[i]);
     if (metrics < min) {
       min = metrics;
       min_index = i;

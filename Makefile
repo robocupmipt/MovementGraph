@@ -1,8 +1,8 @@
 CONFIG_NAME_FOR_TESTING		= linux-sdk
 CONFIG_NAME_FOR_ROBOT		= atom-sdk
-GEN_NAME			= generator.py
-IP				= 192.168.1.2
-VERTEXSET			= ./test/vertex.txt
+GEN_NAME					= generator.py
+IP							= 192.168.1.2
+VERTEXSET					= ./test/vertex.txt
 EDGESET				= ./test/edge.txt
 OUTPUT				= automaticInitGeneration.h
 CMakeListsTest			= CMakeListsTest.txt

@@ -1,5 +1,7 @@
 #include "graphcreator.h"
 
+#include <alproxies/alsensorsproxy.h>
+
 GraphCreator::GraphCreator(boost::shared_ptr<AL::ALBroker> pBroker, const std::string& pName) :
   ALModule(pBroker, pName),
   graph_(pBroker),
@@ -65,6 +67,24 @@ void GraphCreator::init() {
     else if (command == "MOVE") {
       Move();
     }
+    else if (command == "MOVE_FAST") {
+      MoveFast();
+    }
+    else if (command == "GO_FORVARD") {
+      GoForvard();
+    }
+    else if (command == "GO_BACK") {
+      GoBack();
+    }
+    else if (command == "START_MOVE") {
+      StartMove();
+    }
+    else if (command == "STOP_MOVE") {
+      StopMove();
+    }
+    else if (command == "ROTATE") {
+      Rotate();
+    }
     else if (command == "HVA") {
       SetHeadVerticalAngle();
     }
@@ -79,6 +99,19 @@ void GraphCreator::init() {
     }
     else if (command == "GUB") {
       GetUpBack();
+    }
+    else if (command == "TO") {
+      ToPoint();
+    }
+    else if (command == "dimka") {
+      AL::ALSensorsProxy pr;
+      std::vector<std::string> output = pr.getOutputNames();
+
+      std::cout << output.size() << std::endl;
+
+      for (int i = 0; i < output.size(); ++i) {
+        std::cout << output[i] << std::endl;
+      }
     }
     else {
       SmallLog("UNKNOWN COMMAND", 2);
@@ -235,6 +268,50 @@ void GraphCreator::Move() {
   graph_.Move(x, y, theta * TO_RAD);
 }
 
+void GraphCreator::MoveFast() {
+  float x, y, theta;
+
+  SmallLog("Its a Move section insert x, y and Theta:", 2);
+  x     = SmallLog<float>("ENTER x in meters:", 2, true);
+  y     = SmallLog<float>("ENTER y in meters:", 2, true);
+  theta = SmallLog<float>("ENTER Theta in Degree:", 2, true);
+  graph_.MoveFast(x, y, theta * TO_RAD);
+}
+
+void GraphCreator::GoForvard() {
+  float len;
+
+  SmallLog("Its a Go_Forvard section insert len:", 2);
+  len = SmallLog<float>("ENTER len in meters:", 2, true);
+  graph_.GoForvardFast(len);
+}
+
+void GraphCreator::GoBack() {
+  float len;
+
+  SmallLog("Its a Go_Back section insert len:", 2);
+  len = SmallLog<float>("ENTER len in meters:", 2, true);
+  graph_.GoBackFast(len);
+}
+
+void GraphCreator::Rotate() {
+  float theta;
+
+  SmallLog("Its a Rotate section insert len:", 2);
+  theta = SmallLog<float>("ENTER theta in meters:", 2, true);
+  graph_.Rotate(theta);
+}
+
+void GraphCreator::StartMove() {
+  SmallLog("Its START MOVE:", 2);
+  graph_.StartMove();
+}
+
+void GraphCreator::StopMove() {
+  SmallLog("Its STOP MOVE:", 2);
+  graph_.StopMove();
+}
+
 void GraphCreator::SetHeadVerticalAngle() {
   float angle = SmallLog<float>("Enter angle from down(-29.5) to up(38.5)", 2, true);
   graph_.SetHeadVerticalAngle(angle);
@@ -255,6 +332,11 @@ void GraphCreator::GetUpFront() {
 
 void GraphCreator::GetUpBack() {
   graph_.GetUpBack();
+}
+
+void GraphCreator::ToPoint() {
+  std::string v_name(SmallLog("ENTER Vertex Name:", 2, true));
+  graph_.ToPoint(v_name);
 }
 
 /*------- PRIVAT SPACE ---------*/

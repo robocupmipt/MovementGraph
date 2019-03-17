@@ -17,6 +17,24 @@ MovementGraph::MovementGraph(boost::shared_ptr<ALBroker> broker, const std::stri
   addParam("theta", "Its a rotate angle from start position");
   BIND_METHOD(MovementGraph::Move);
 
+  functionName("GoForvard", getName(), "move robot forvard");
+  addParam("len", "displacement to the forvard in meters. Negative value is wrong.");
+  BIND_METHOD(MovementGraph::GoForvard);
+
+  functionName("GoBack", getName(), "move robot back");
+  addParam("len", "displacement to the back in meters. Negative value is wrong.");
+  BIND_METHOD(MovementGraph::GoBack);
+
+  functionName("Rotate", getName(), "rotate robot");
+  addParam("len", "displacement to rotate in angle. Negative value is wrong.");
+  BIND_METHOD(MovementGraph::Rotate);
+
+  functionName("StartMove", getName(), "Start move robot");
+  BIND_METHOD(MovementGraph::StartMove);
+
+  functionName("StopMove", getName(), "Stap move robot");
+  BIND_METHOD(MovementGraph::StopMove);
+
   functionName("RightKick", getName(), "kick by right foot");
   BIND_METHOD(MovementGraph::RightKick);
 
@@ -64,6 +82,30 @@ void MovementGraph::init() {
 
 void MovementGraph::Move(float x, float y, float theta) {
   graph_.Move(x, y, theta);
+}
+
+void MovementGraph::GoForvard(float len) {
+  graph_.GoForvardFast(len);
+}
+
+void MovementGraph::GoBack(float len) {
+  graph_.GoBackFast(len);
+}
+
+void MovementGraph::Rotate(float theta) {
+  graph_.GoForvardFast(theta);
+}
+
+void MovementGraph::StopMove() {
+  graph_.StopMove();
+}
+
+void MovementGraph::StartMove() {
+  graph_.StartMove();
+}
+
+void MovementGraph::SetTheta(float theta, float len) {
+  graph_.SetTheta(theta, len);
 }
 
 void MovementGraph::RightKick() {

@@ -12,6 +12,18 @@ class MovementGraph : public AL::ALModule {
 
   void Move(float x, float y, float theta);
 
+  void GoForvard(float len);
+
+  void GoBack(float len);
+
+  void Rotate(float theta);
+
+  void StartMove();
+
+  void StopMove();
+
+  void SetTheta(float theta, float len);
+
   void RightKick();
 
   void LeftKick();
@@ -27,8 +39,6 @@ class MovementGraph : public AL::ALModule {
   void LookDown(int level);
 
   void ToInit();
-
-  void ToInit(float time);
   
   void GetUpFront();
 
