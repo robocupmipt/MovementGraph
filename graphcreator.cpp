@@ -76,6 +76,9 @@ void GraphCreator::init() {
     else if (command == "GO_BACK") {
       GoBack();
     }
+    else if (command == "GO_LEFT") {
+      GoLeft();
+    }
     else if (command == "START_MOVE") {
       StartMove();
     }
@@ -289,6 +292,14 @@ void GraphCreator::GoBack() {
   SmallLog("Its a Go_Back section insert len:", 2);
   len = SmallLog<float>("ENTER len in meters:", 2, true);
   graph_.GoBackFast(len);
+}
+
+void GraphCreator::GoLeft() {
+  float len;
+
+  SmallLog("Its a Go_Left section insert len:", 2);
+  len = SmallLog<float>("ENTER len in meters:", 2, true);
+  graph_.GoLeftFast(len);
 }
 
 void GraphCreator::Rotate() {

@@ -198,8 +198,6 @@ void KernelGraph::GetUpBack() {
   RunChain(names, 1);
 }
 
-/*------- PRIVATE SPACE ---------*/
-
 bool KernelGraph::ToPoint(const std::string& finish_name) {
   std::vector <const Edge*> way;
 
@@ -316,7 +314,7 @@ void KernelGraph::GoForwardFast(float len) const {
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
   params.SetParam("StepHeight", 0.027);
-  params.SetParam("TorsoWy", 0.01);
+  params.SetParam("TorsoWy", 0.1);
 
   motion_.setMoveArmsEnabled(true, true);
 
@@ -342,6 +340,21 @@ void KernelGraph::GoBackFast(float len) const {
   motion_.move(-X_VELOCITY_, 0, 0, params.GetParams());
  }
 
+void KernelGraph::GoLeftFast(float len) const {
+  assert(len >= EPS);
+
+  MoveParams params;
+  params.SetParam("StepHeight", 0.027);
+  params.SetParam("TorsoWy", 0.1);
+
+  motion_.setMoveArmsEnabled(true, true);
+
+  float Y_VELOCITY_ = 0.07;
+
+  motion_.move(0, Y_VELOCITY_, 0, params.GetParams());
+}
+
+//wtf
 float KernelGraph::GetRealAngle(float theta) const {
   float sign = (theta < 0) ? -1 : 1;
   float new_theta = (fabs(theta) + 30 * TO_RAD) * 9 / 10;

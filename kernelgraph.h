@@ -47,6 +47,8 @@ class KernelGraph : public PrimalGraph {
   void GoForwardFast(float len) const;
 
   void GoBackFast(float len) const;
+  
+  void GoLeftFast(float len) const;
 
   void StopMove() const;
 
@@ -54,11 +56,11 @@ class KernelGraph : public PrimalGraph {
 
   void Rotate(float theta) const;
 
-  void SetTheta(float theta, float len) const;
+  void SetTheta(float theta, float len) const; // dont exists
 
-  void RightKick();
+  void RightKick(); // dont exists
 
-  void LeftKick();
+  void LeftKick(); // dont exists
 
   void GetUpFront();
 
