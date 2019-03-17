@@ -45,6 +45,8 @@ class GraphCreator : public AL::ALModule {
 
   void GoLeft();
 
+  void GoRight();
+
   void Rotate();
 
   void StartMove();

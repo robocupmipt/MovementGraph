@@ -50,6 +50,8 @@ class KernelGraph : public PrimalGraph {
   
   void GoLeftFast(float len) const;
 
+  void GoRightFast(float len) const;
+
   void StopMove() const;
 
   void StartMove() const;

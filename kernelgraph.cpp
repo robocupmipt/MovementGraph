@@ -310,7 +310,9 @@ void KernelGraph::GoForward(float len) const {
 
 void KernelGraph::GoForwardFast(float len) const {
   assert(len >= 0);
-  
+
+  posture_.goToPosture("StandInit", 0.5);
+
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
   params.SetParam("StepHeight", 0.027);
@@ -318,15 +320,16 @@ void KernelGraph::GoForwardFast(float len) const {
 
   motion_.setMoveArmsEnabled(true, true);
 
-  float X_VELOCITY_ = 0.1;
-  float time_walk = len / X_VELOCITY_;
+  float X_VELOCITY_ = 0.15;
 
   motion_.move(X_VELOCITY_, 0, 0, params.GetParams());
  }
 
 void KernelGraph::GoBackFast(float len) const {
   assert(len >= 0);
-  
+
+  posture_.goToPosture("StandInit", 0.5);
+
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
   params.SetParam("StepHeight", 0.027);
@@ -334,7 +337,7 @@ void KernelGraph::GoBackFast(float len) const {
 
   motion_.setMoveArmsEnabled(true, true);
 
-  float X_VELOCITY_ = 0.1;
+  float X_VELOCITY_ = 0.15;
   float time_walk = len / X_VELOCITY_;
 
   motion_.move(-X_VELOCITY_, 0, 0, params.GetParams());
@@ -342,6 +345,8 @@ void KernelGraph::GoBackFast(float len) const {
 
 void KernelGraph::GoLeftFast(float len) const {
   assert(len >= EPS);
+
+  posture_.goToPosture("StandInit", 0.5);
 
   MoveParams params;
   params.SetParam("StepHeight", 0.027);
@@ -352,6 +357,22 @@ void KernelGraph::GoLeftFast(float len) const {
   float Y_VELOCITY_ = 0.065;
 
   motion_.move(0, Y_VELOCITY_, 0, params.GetParams());
+}
+
+void KernelGraph::GoRightFast(float len) const {
+  assert(len >= EPS);
+
+  posture_.goToPosture("StandInit", 0.5);
+
+  MoveParams params;
+  params.SetParam("StepHeight", 0.027);
+  params.SetParam("TorsoWy", -0.1);
+
+  motion_.setMoveArmsEnabled(true, true);
+
+  float Y_VELOCITY_ = 0.065;
+
+  motion_.move(0, -Y_VELOCITY_, 0, params.GetParams());
 }
 
 //wtf
