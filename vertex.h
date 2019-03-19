@@ -5,7 +5,8 @@ class Edge;
 class Vertex {
  public:
   Vertex() = delete;
-  Vertex(std::vector <float> new_param_values_, bool is_radian = false);
+  Vertex(std::vector <std::pair<float, float> > new_param_values_, bool is_radian = false);
+  Vertex(std::vector <float> new_angel_values_, std::vector <float> new_hardness_values_, bool is_radian = false);
   Vertex(const Vertex& vertex);
 
   Vertex& operator =(const Vertex& vertex);
@@ -22,6 +23,8 @@ class Vertex {
 
   std::vector<float> GetDegreesValues() const;
 
+  std::vector<float> GetHardnessValues() const;
+
   void AddEdge(const Edge* new_edge);
 
   void PrintState(std::ostream &out) const;
@@ -36,5 +39,6 @@ class Vertex {
   std::string name_;
   std::vector <float> degree_values_;
   std::vector <float> radian_values_;
+  std::vector <float> hardness_values_;
   std::vector <const Edge*> adjacent_edges_;
 };
