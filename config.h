@@ -12,6 +12,7 @@ const float TO_RAD = PI / 180;
 const float TO_DEG = 180 / PI;
 const float EPS    = 1e-5; /// !!!!! meybe so littel
 const float DEFAULT_TIME = 1.3;
+const float DEFAULT_TIME_STIFFNESS = 1;
 const float DEFAULT_ACCELERATION = 1.0;
 const size_t PARAM_NUM_ = 24;
 

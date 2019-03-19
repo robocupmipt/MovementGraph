@@ -15,7 +15,6 @@ void GraphCreator::init() {
   // инициализируем граф
   graph_.Initialize();
 
-
   while (true) {
     std::string command(SmallLog("ENTER command", 1, true));
 
