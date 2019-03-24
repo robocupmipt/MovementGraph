@@ -78,6 +78,8 @@ class KernelGraph : public PrimalGraph {
 
   void LookDown(int level);
 
+  void SetStiffness(std::vector<std::string> motors_, std::vector<float> stiffnesses, float time) const;
+
   // move position robot to finish via graph
   bool ToPoint(const std::string& finish_name);
  private:

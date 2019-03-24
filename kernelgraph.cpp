@@ -220,6 +220,13 @@ bool KernelGraph::ToPoint(const std::string& finish_name) {
   }
 }
 
+void KernelGraph::SetStiffness(std::vector<std::string> motors_, 
+                               std::vector<float> stiffnesses, 
+                               float time) const {
+  motion_.stiffnessInterpolation(motors_, stiffnesses, time);
+}
+
+
 /*------- PRIVAT SPACE ---------*/
 
 void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {

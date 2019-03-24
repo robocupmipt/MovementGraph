@@ -102,6 +102,9 @@ void GraphCreator::init() {
     else if (command == "TO") {
       ToPoint();
     }
+    else if (command == "RUN_WAY") {
+      RunWay();
+    }
     else if (command == "dimka") {
       AL::ALSensorsProxy pr;
       std::vector<std::string> output = pr.getOutputNames();
@@ -336,6 +339,31 @@ void GraphCreator::GetUpBack() {
 void GraphCreator::ToPoint() {
   std::string v_name(SmallLog("ENTER Vertex Name:", 2, true));
   graph_.ToPoint(v_name);
+}
+
+
+void GraphCreator::RunWay() {
+  std::vector <const Edge*> way;
+  std::vector <std::string> path;
+
+
+  std::vector<float> st;
+  path.push_back("HeadYaw");
+  st.push_back(0);
+  graph_.SetStiffness(path, st, 0.1);
+
+  SmallLog("ENTER vertexes names", 2);
+
+  for (int i = 0; i < 2; ++i) {
+    std::string s;
+    std::cin >> s;
+    path.push_back(s);
+  }
+
+  if (!graph_.RunChain(path, 1, 1)) {
+    SmallLog("ERROR Cant run chain", 2);
+    return;
+  }
 }
 
 /*------- PRIVAT SPACE ---------*/

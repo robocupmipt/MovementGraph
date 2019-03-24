@@ -61,6 +61,8 @@ class GraphCreator : public AL::ALModule {
 
   void ToPoint();
 
+  void RunWay();
+
  private:
   bool CheckBuffer() const;
 
