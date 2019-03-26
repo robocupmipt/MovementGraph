@@ -42,12 +42,10 @@ void GraphCreator::init() {
       Run();
     } else if (command == "TEST") {
       Test();
+    } else if (command == "COMPLEX_TEST") {
+      ComplexTest();
     } else if (command == "EXIT") {
       break;
-    } else if (command == "MOVE") {
-      Move();
-    } else if (command == "MOVE_FAST") {
-      MoveFast();
     } else if (command == "GO_FORWARD") {
       GoForward();
     } else if (command == "GO_BACK") {
@@ -60,6 +58,8 @@ void GraphCreator::init() {
       StartMove();
     } else if (command == "STOP_MOVE") {
       StopMove();
+    } else if (command == "PULL_LEGS") {
+      PullLegsTogether();
     } else if (command == "ROTATE") {
       Rotate();
     } else if (command == "HVA") {
@@ -72,15 +72,6 @@ void GraphCreator::init() {
       GetUpBack();
     } else if (command == "TO") {
       ToPoint();
-    } else if (command == "dimka") {
-      AL::ALSensorsProxy pr;
-      std::vector<std::string> output = pr.getOutputNames();
-
-      std::cout << output.size() << std::endl;
-
-      for (int i = 0; i < output.size(); ++i) {
-        std::cout << output[i] << std::endl;
-      }
     } else {
       SmallLog("UNKNOWN COMMAND", 2);
     }
@@ -216,56 +207,24 @@ void GraphCreator::Test() {
   }
 }
 
-void GraphCreator::Move() {
-  float x, y, theta;
-
-  SmallLog("Its a Move section insert x, y and Theta:", 2);
-  x = SmallLog<float>("ENTER x in meters:", 2, true);
-  y = SmallLog<float>("ENTER y in meters:", 2, true);
-  theta = SmallLog<float>("ENTER Theta in Degree:", 2, true);
-  graph_.Move(x, y, theta * TO_RAD);
-}
-
-void GraphCreator::MoveFast() {
-  float x, y, theta;
-
-  SmallLog("Its a Move section insert x, y and Theta:", 2);
-  x = SmallLog<float>("ENTER x in meters:", 2, true);
-  y = SmallLog<float>("ENTER y in meters:", 2, true);
-  theta = SmallLog<float>("ENTER Theta in Degree:", 2, true);
-  graph_.MoveFast(x, y, theta * TO_RAD);
-}
-
 void GraphCreator::GoForward() {
-  float len;
-
   SmallLog("Its a Go_Forward section insert len:", 2);
-  len = SmallLog<float>("ENTER len in meters:", 2, true);
-  graph_.GoForwardFast(len);
+  graph_.GoForwardFast();
 }
 
 void GraphCreator::GoBack() {
-  float len;
-
   SmallLog("Its a Go_Back section insert len:", 2);
-  len = SmallLog<float>("ENTER len in meters:", 2, true);
-  graph_.GoBackFast(len);
+  graph_.GoBackFast();
 }
 
 void GraphCreator::GoLeft() {
-  float len;
-
   SmallLog("Its a Go_Left section insert len:", 2);
-  len = SmallLog<float>("ENTER len in meters:", 2, true);
-  graph_.GoLeftFast(len);
+  graph_.GoLeftFast();
 }
 
 void GraphCreator::GoRight() {
-  float len;
-
   SmallLog("Its a Go_Right section insert len:", 2);
-  len = SmallLog<float>("ENTER len in meters:", 2, true);
-  graph_.GoRightFast(len);
+  graph_.GoRightFast();
 }
 
 void GraphCreator::Rotate() {
@@ -309,7 +268,17 @@ void GraphCreator::ToPoint() {
   graph_.ToPoint(v_name);
 }
 
-/*------- PRIVAT SPACE ---------*/
+void GraphCreator::ComplexTest() {
+  SmallLog("Testing...", 2);
+  graph_.ComplexTest();
+}
+
+void GraphCreator::PullLegsTogether() {
+  SmallLog("Moving legs", 2);
+  graph_.PullLegsTogether();
+}
+
+/*------- PRIVATE SPACE ---------*/
 
 
 bool GraphCreator::CheckBuffer() const {

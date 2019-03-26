@@ -31,10 +31,6 @@ class GraphCreator : public AL::ALModule {
 
   void Test();
 
-  void Move();
-
-  void MoveFast();
-
   void GoForward();
 
   void GoBack();
@@ -44,6 +40,8 @@ class GraphCreator : public AL::ALModule {
   void GoRight();
 
   void Rotate();
+
+  void PullLegsTogether();
 
   void StartMove();
 
@@ -58,6 +56,9 @@ class GraphCreator : public AL::ALModule {
   void GetUpBack();
 
   void ToPoint();
+
+  // Validation
+  void ComplexTest();
 
  private:
   bool CheckBuffer() const;

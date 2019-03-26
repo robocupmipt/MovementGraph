@@ -39,17 +39,13 @@ class KernelGraph : public PrimalGraph {
 
   void BehaviorOff() const;
 
-  void Move(float x, float y, float theta);
+  void GoForwardFast();
 
-  void MoveFast(float x, float y, float theta);
+  void GoBackFast();
 
-  void GoForwardFast(float len);
+  void GoLeftFast();
 
-  void GoBackFast(float len);
-
-  void GoLeftFast(float len);
-
-  void GoRightFast(float len);
+  void GoRightFast();
 
   void StopMove() const;
 
@@ -57,7 +53,7 @@ class KernelGraph : public PrimalGraph {
 
   void Rotate(float theta);
 
-  void SetTheta(float theta, float len); // dont exists
+  void PullLegsTogether();
 
   void GetUpFront();
 
@@ -74,6 +70,9 @@ class KernelGraph : public PrimalGraph {
   void ToInit();
 
   void LookDown(int level);
+
+  // Validation
+  void ComplexTest();
 
   // move position robot to finish via graph
   bool ToPoint(const std::string &finish_name);

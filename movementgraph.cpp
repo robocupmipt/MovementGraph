@@ -10,19 +10,17 @@ MovementGraph::MovementGraph(boost::shared_ptr<ALBroker> broker, const std::stri
 
   setModuleDescription("Module for robot movements.");
 
-  functionName("Move", getName(), "move robot in other position");
-  addParam("x", "displacement to the right in meters. Negative value to the left.");
-  addParam("y", "displacement to front in meters. Negative value to back.");
-  addParam("theta", "Its a rotate angle from start position");
-  BIND_METHOD(MovementGraph::Move);
-
   functionName("GoForward", getName(), "move robot forward");
-  addParam("len", "displacement to the forward in meters. Negative value is wrong.");
   BIND_METHOD(MovementGraph::GoForward);
 
   functionName("GoBack", getName(), "move robot back");
-  addParam("len", "displacement to the back in meters. Negative value is wrong.");
   BIND_METHOD(MovementGraph::GoBack);
+
+  functionName("GoRight", getName(), "move robot right");
+  BIND_METHOD(MovementGraph::GoRight);
+
+  functionName("GoLeft", getName(), "move robot left");
+  BIND_METHOD(MovementGraph::GoLeft);
 
   functionName("Rotate", getName(), "rotate robot");
   addParam("len", "displacement to rotate in angle. Negative value is wrong.");
@@ -33,12 +31,6 @@ MovementGraph::MovementGraph(boost::shared_ptr<ALBroker> broker, const std::stri
 
   functionName("StopMove", getName(), "Stap move robot");
   BIND_METHOD(MovementGraph::StopMove);
-
-  functionName("RightKick", getName(), "kick by right foot");
-  BIND_METHOD(MovementGraph::RightKick);
-
-  functionName("LeftKick", getName(), "kick by left foot");
-  BIND_METHOD(MovementGraph::LeftKick);
 
   functionName("GetHeadVerticalAngle", getName(), "Current Head angle from left to right relative to body direction");
   setReturn("angle", "angle in degree");
@@ -78,16 +70,20 @@ MovementGraph::~MovementGraph() {}
 void MovementGraph::init() {
 }
 
-void MovementGraph::Move(float x, float y, float theta) {
-  graph_.Move(x, y, theta);
+void MovementGraph::GoForward() {
+  graph_.GoForwardFast();
 }
 
-void MovementGraph::GoForward(float len) {
-  graph_.GoForwardFast(len);
+void MovementGraph::GoBack() {
+  graph_.GoBackFast();
 }
 
-void MovementGraph::GoBack(float len) {
-  graph_.GoBackFast(len);
+void MovementGraph::GoRight() {
+  graph_.GoRightFast();
+}
+
+void MovementGraph::GoLeft() {
+  graph_.GoLeftFast();
 }
 
 void MovementGraph::Rotate(float theta) {
@@ -100,10 +96,6 @@ void MovementGraph::StopMove() {
 
 void MovementGraph::StartMove() {
   graph_.StartMove();
-}
-
-void MovementGraph::SetTheta(float theta, float len) {
-  graph_.SetTheta(theta, len);
 }
 
 float MovementGraph::GetHeadVerticalAngle() {

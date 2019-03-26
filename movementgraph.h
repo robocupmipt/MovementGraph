@@ -9,19 +9,19 @@ class MovementGraph : public AL::ALModule {
 
   virtual void init();
 
-  void Move(float x, float y, float theta);
+  void GoForward();
 
-  void GoForward(float len);
+  void GoBack();
 
-  void GoBack(float len);
+  void GoRight();
+
+  void GoLeft();
 
   void Rotate(float theta);
 
   void StartMove();
 
   void StopMove();
-
-  void SetTheta(float theta, float len);
 
   float GetHeadVerticalAngle();
 

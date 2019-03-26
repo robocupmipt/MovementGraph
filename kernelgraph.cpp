@@ -1,5 +1,8 @@
 #include "kernelgraph.h"
 
+#include <thread>
+#include <chrono>
+
 KernelGraph::KernelGraph(boost::shared_ptr<AL::ALBroker> broker) :
     broker_(broker),
     motion_(broker),
@@ -82,49 +85,6 @@ void KernelGraph::BehaviorOff() const {
 #ifdef MOVEMENTGRAPH_IS_REMOTE
   life_proxy_.setState("disabled");
 #endif
-}
-
-void KernelGraph::Move(float x, float y, float theta) {
-  motion_.wakeUp();
-
-  float first_rotate = atan2(x, y) - PI / 2;
-  float len = sqrt(x * x + y * y);
-  float second_rotate = theta - first_rotate;
-
-  if (len > EPS) {
-    Rotate(first_rotate);
-    GoForwardFast(len);
-    Rotate(second_rotate);
-  } else {
-    Rotate(theta);
-  }
-  posture_.goToPosture("StandInit", 0.5);
-}
-
-void KernelGraph::MoveFast(float x, float y, float theta) {
-  motion_.wakeUp();
-
-  float first_rotate = atan2(x, y) - PI / 2;
-  float len = sqrt(x * x + y * y);
-  float second_rotate = theta - first_rotate;
-
-  if (first_rotate > EPS) {
-    Rotate(first_rotate);
-  }
-  if (len > EPS) {
-    GoForwardFast(len);
-  }
-  if (second_rotate > EPS) {
-    Rotate(second_rotate);
-  }
-}
-
-void KernelGraph::SetTheta(float theta, float len) {
-  StopMove();
-
-  Rotate(theta);
-
-  GoForwardFast(len);
 }
 
 void KernelGraph::StopMove() const {
@@ -268,16 +228,14 @@ void KernelGraph::Rotate(float theta) {
   motion_.stopMove();
 }
 
-void KernelGraph::GoForwardFast(float len) {
-  assert(len >= 0);
-
+void KernelGraph::GoForwardFast() {
   float time = 1;
   Run("INIT", time);
 
   MoveParams params;
-  params.SetParam("MaxStepX", 0.06);
+  params.SetParam("MaxStepX", 0.04);
   params.SetParam("StepHeight", 0.027);
-  params.SetParam("TorsoWy", 0.1);
+  params.SetParam("TorsoWy", 0.01);
 
   motion_.setMoveArmsEnabled(true, true);
 
@@ -286,9 +244,7 @@ void KernelGraph::GoForwardFast(float len) {
   motion_.move(X_VELOCITY_, 0, 0, params.GetParams());
 }
 
-void KernelGraph::GoBackFast(float len) {
-  assert(len >= 0);
-
+void KernelGraph::GoBackFast() {
   float time = 1;
   Run("INIT", time);
 
@@ -300,20 +256,17 @@ void KernelGraph::GoBackFast(float len) {
   motion_.setMoveArmsEnabled(true, true);
 
   float X_VELOCITY_ = 0.15;
-  float time_walk = len / X_VELOCITY_;
 
   motion_.move(-X_VELOCITY_, 0, 0, params.GetParams());
 }
 
-void KernelGraph::GoLeftFast(float len) {
-  assert(len >= EPS);
-
+void KernelGraph::GoLeftFast() {
   float time = 1;
   Run("INIT", time);
 
   MoveParams params;
   params.SetParam("StepHeight", 0.027);
-  params.SetParam("TorsoWy", 0.1);
+  params.SetParam("TorsoWy", 0.01);
 
   motion_.setMoveArmsEnabled(true, true);
 
@@ -322,9 +275,7 @@ void KernelGraph::GoLeftFast(float len) {
   motion_.move(0, Y_VELOCITY_, 0, params.GetParams());
 }
 
-void KernelGraph::GoRightFast(float len) {
-  assert(len >= EPS);
-
+void KernelGraph::GoRightFast() {
   float time = 1;
   Run("INIT", time);
 
@@ -345,3 +296,30 @@ float KernelGraph::GetRealAngle(float theta) const {
   return sign * new_theta;
 }
 
+void KernelGraph::ComplexTest() {
+  Wake();
+  float time = 1;
+  Run("INIT", time);
+  GoForwardFast();
+  sleep(5);
+  StopMove();
+  GoBackFast();
+  sleep(5);
+  StopMove();
+  GoLeftFast();
+  sleep(5);
+  StopMove();
+  GoRightFast();
+  sleep(5);
+  StopMove();
+  Rotate(45 * TO_RAD);
+  Rotate(-45 * TO_RAD);
+}
+
+void KernelGraph::PullLegsTogether() {
+  float time = 1;
+  Run("INIT", time);
+  GoLeftFast();
+  std::this_thread::sleep_for(std::chrono::milliseconds(1450));
+  StopMove();
+}
