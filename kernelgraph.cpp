@@ -54,8 +54,8 @@ void KernelGraph::Run(const Vertex* v, float time, float timeStiffness) {
   assert(v != nullptr);
   assert(time > 0);
   
-  motion_.stiffnessInterpolation(PARAM_NAMES, v->GetHardnessValues(), time);
-  motion_.angleInterpolation(PARAM_NAMES, v->GetRadianValues(), timeStiffness, true);
+  motion_.stiffnessInterpolation(PARAM_NAMES, v->GetHardnessValues(), timeStiffness);
+  motion_.angleInterpolation(PARAM_NAMES, v->GetRadianValues(), time, true);
 }
 
 void KernelGraph::Rest() const {
@@ -242,7 +242,7 @@ void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {
   float curr_time = 0;
 
   for (int i = 0; i < edges.size(); ++i) {
-    Run(edges[i]->GetEnd(), edges[i]->GetTime());
+    Run(edges[i]->GetEnd(), edges[i]->GetTime() * acceleration);
   }
 }
 
