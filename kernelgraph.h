@@ -11,9 +11,8 @@
 #include <alproxies/alrobotpostureproxy.h>
 #include "primalgraph.h"
 
-namespace AL
-{
-  class ALBroker;
+namespace AL {
+class ALBroker;
 }
 
 class KernelGraph : public PrimalGraph {
@@ -22,13 +21,13 @@ class KernelGraph : public PrimalGraph {
 
   Vertex GetCurrentState() const;
 
-  bool RunChain(const std::vector <std::string>& chain,
+  bool RunChain(const std::vector<std::string> &chain,
                 int cnt,
                 float acceleration = DEFAULT_ACCELERATION);
 
-  bool Run(const std::string& v_name, float time = DEFAULT_TIME, float timeStiffness = DEFAULT_TIME_STIFFNESS);
+  bool Run(const std::string &v_name, float time = DEFAULT_TIME, float timeStiffness = DEFAULT_TIME_STIFFNESS);
 
-  void Run(const Vertex* v, float time = DEFAULT_TIME, float timeStiffness = DEFAULT_TIME_STIFFNESS);
+  void Run(const Vertex *v, float time = DEFAULT_TIME, float timeStiffness = DEFAULT_TIME_STIFFNESS);
 
   void Rest() const;
 
@@ -40,31 +39,25 @@ class KernelGraph : public PrimalGraph {
 
   void BehaviorOff() const;
 
-  void Move(float x, float y, float theta);
+  void GoForwardFast();
 
-  void MoveFast(float x, float y, float theta);
+  void GoBackFast();
 
-  void GoForvardFast(float len) const;
+  void GoLeftFast();
 
-  void GoBackFast(float len) const;
+  void GoRightFast();
 
   void StopMove() const;
 
   void StartMove() const;
 
-  void Rotate(float theta) const;
+  void Rotate(float theta);
 
-  void SetTheta(float theta, float len) const;
-
-  void RightKick();
-
-  void LeftKick();
+  void PullLegsTogether();
 
   void GetUpFront();
 
   void GetUpBack();
-
-  void Fun();
 
   float GetHeadVerticalAngle();
 
@@ -78,17 +71,20 @@ class KernelGraph : public PrimalGraph {
 
   void LookDown(int level);
 
+  // Validation
+  void ComplexTest();
+
   void SetStiffness(std::vector<std::string> motors_, std::vector<float> stiffnesses, float time) const;
 
   // move position robot to finish via graph
-  bool ToPoint(const std::string& finish_name);
+  bool ToPoint(const std::string &finish_name);
  private:
 
-  void RunWay(std::vector <const Edge*> edges, float acceleration);
+  void RunWay(std::vector<const Edge *> edges, float acceleration);
   
-  void RunWayBezier(std::vector <const Edge*> edges, float acceleration);
+  void RunWayBezier(std::vector<const Edge *> edges, float acceleration);
 
-  void GoForward(float len) const;
+  void RunWayDimka(std::vector<const Edge *> edges, float acceleration);
 
   float GetRealAngle(float theta) const;
 

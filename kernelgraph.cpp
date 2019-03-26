@@ -1,5 +1,8 @@
 #include "kernelgraph.h"
 
+#include <thread>
+#include <chrono>
+
 KernelGraph::KernelGraph(boost::shared_ptr<AL::ALBroker> broker) :
     broker_(broker),
     motion_(broker),
@@ -17,18 +20,17 @@ Vertex KernelGraph::GetCurrentState() const {
   return Vertex(result_value, result_hardness, true);
 }
 
-bool KernelGraph::RunChain(const std::vector <std::string>& chain,
-              int cnt,
-              float acceleration) {
+bool KernelGraph::RunChain(const std::vector<std::string> &chain,
+                           int cnt,
+                           float acceleration) {
   assert(cnt > 0);
   assert(chain.size() > 1);
 
-  std::vector <const Edge*> way, full_way;
+  std::vector<const Edge *> way, full_way;
 
   if (!FindWayThroughVertexes(chain, way)) {
     return false;
   }
-
 
   for (int i = 0; i < cnt; ++i) {
     for (int j = 0; j < way.size(); ++j) {
@@ -41,7 +43,7 @@ bool KernelGraph::RunChain(const std::vector <std::string>& chain,
   return true;
 }
 
-bool KernelGraph::Run(const std::string& v_name, float time, float timeStiffness) {
+bool KernelGraph::Run(const std::string &v_name, float time, float timeStiffness) {
   if (!IsVertexContains(v_name)) {
     return false;
   }
@@ -67,7 +69,7 @@ void KernelGraph::Wake() const {
 }
 
 void KernelGraph::StrongRest() const {
-  std::vector <float> param;
+  std::vector<float> param;
   for (int i = 0; i < PARAM_NUM_; ++i) {
     param.push_back(0);
   }
@@ -75,7 +77,7 @@ void KernelGraph::StrongRest() const {
 }
 
 void KernelGraph::StrongWake() const {
-  std::vector <float> param;
+  std::vector<float> param;
   for (int i = 0; i < PARAM_NUM_; ++i) {
     param.push_back(1);
   }
@@ -88,51 +90,6 @@ void KernelGraph::BehaviorOff() const {
 #endif
 }
 
-void KernelGraph::Move(float x, float y, float theta) {
-  motion_.wakeUp();
-
-  float first_rotate = atan2(x, y) - PI / 2;
-  float len = sqrt(x * x + y * y);
-  float second_rotate = theta - first_rotate;
-
-  if (len > EPS) {
-    Rotate(first_rotate);
-    GoForward(len);
-    Rotate(second_rotate);
-  } else {
-    Rotate(theta);
-  }
-  posture_.goToPosture("StandInit", 0.5);
-}
-
-void KernelGraph::MoveFast(float x, float y, float theta) {
-  motion_.wakeUp();
-
-  float first_rotate = atan2(x, y) - PI / 2;
-  float len = sqrt(x * x + y * y);
-  float second_rotate = theta - first_rotate;
-
-  if (first_rotate > EPS) {
-    Rotate(first_rotate);
-  }
-  if (len > EPS) {
-    GoForvardFast(len);
-  } 
-  if (second_rotate > EPS) {
-    Rotate(second_rotate);
-  }
-  //posture_.goToPosture("StandInit", 0.5);
-}
-
-
-void KernelGraph::SetTheta(float theta, float len) const {
-  StopMove();
-
-  Rotate(theta);
-
-  GoForvardFast(len);
-}
-
 void KernelGraph::StopMove() const {
   motion_.stopMove();
   motion_.setMoveArmsEnabled(false, false);
@@ -140,23 +97,6 @@ void KernelGraph::StopMove() const {
 
 void KernelGraph::StartMove() const {
   posture_.goToPosture("StandInit", 0.5);
-}
-
-
-void KernelGraph::RightKick() {
-
-}
-
-
-void KernelGraph::LeftKick() {
-}
-
-// end copy
-
-
-void KernelGraph::Fun() {
-  boost::shared_ptr<AL::ALProxy> testProxy
-      = boost::shared_ptr<AL::ALProxy>(new AL::ALProxy(broker_, "MovementGraph"));
 }
 
 float KernelGraph::GetHeadVerticalAngle() {
@@ -173,7 +113,7 @@ void KernelGraph::SetHeadVerticalAngle(float angle) {
   assert(angle <= 38.5);
   assert(angle >= -29.5);
 
-  float fractionMaxSpeed  = 0.3;
+  float fractionMaxSpeed = 0.3;
   motion_.setAngles(PARAM_NAMES[1], -angle * TO_RAD, fractionMaxSpeed);
 }
 
@@ -181,7 +121,7 @@ void KernelGraph::SetHeadHorizontalAngle(float angle) {
   assert(angle <= 119.5);
   assert(angle >= -119.5);
 
-  float fractionMaxSpeed  = 0.3;
+  float fractionMaxSpeed = 0.3;
   motion_.setAngles(PARAM_NAMES[0], angle * TO_RAD, fractionMaxSpeed);
 }
 
@@ -192,23 +132,23 @@ void KernelGraph::ToInit() {
 
 void KernelGraph::LookDown(int level) {
   assert(level <= 7);
-  std::vector <std::string> names({"INIT", "FB" + std::to_string(level)});
+  std::vector<std::string> names({"INIT", "FB" + std::to_string(level)});
   RunChain(names, 1);
 }
 
 void KernelGraph::GetUpFront() {
-  std::vector <std::string> names({"GUF0", "GUF15"});
+  std::vector<std::string> names({"GUF0", "GUF15"});
   RunChain(names, 1);
   //posture_.goToPosture("StandInit", 0.5);
 }
 
 void KernelGraph::GetUpBack() {
-  std::vector <std::string> names({"GUB0", "GUB14"});
+  std::vector<std::string> names({"GUB0", "GUB14"});
   RunChain(names, 1);
 }
 
-bool KernelGraph::ToPoint(const std::string& finish_name) {
-  std::vector <const Edge*> way;
+bool KernelGraph::ToPoint(const std::string &finish_name) {
+  std::vector<const Edge *> way;
 
   std::string start_name = GetNearestVertex(Vertex(GetCurrentState()))->GetName();
 
@@ -226,7 +166,6 @@ void KernelGraph::SetStiffness(std::vector<std::string> motors_,
   motion_.stiffnessInterpolation(motors_, stiffnesses, time);
 }
 
-
 /*------- PRIVAT SPACE ---------*/
 
 void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {
@@ -235,10 +174,9 @@ void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {
     return;
   }
 
-
   AL::ALValue angleLists;
   AL::ALValue timeLists;
-  std::vector <float> time_list;
+  std::vector<float> time_list;
   float curr_time = 0;
 
   for (int i = 0; i < edges.size(); ++i) {
@@ -252,11 +190,10 @@ void KernelGraph::RunWayBezier(std::vector <const Edge*> edges, float accelerati
     return;
   }
 
-
   AL::ALValue angleLists;
   AL::ALValue timeLists;
-  std::vector <std::vector <float> > params_list;
-  std::vector <float> time_list;
+  std::vector<std::vector<float>> params_list;
+  std::vector<float> time_list;
   float curr_time = 0;
 
   for (int i = 0; i < edges.size(); ++i) {
@@ -265,9 +202,8 @@ void KernelGraph::RunWayBezier(std::vector <const Edge*> edges, float accelerati
     params_list.push_back(edges[i]->GetEnd()->GetRadianValues());
   }
 
-
   for (int i = 0; i < PARAM_NUM_; ++i) {
-    std::vector <float> joint_path;
+    std::vector<float> joint_path;
     for (int j = 0; j < params_list.size(); ++j) {
       float angle = params_list[j][i];
       joint_path.push_back(angle);
@@ -279,17 +215,18 @@ void KernelGraph::RunWayBezier(std::vector <const Edge*> edges, float accelerati
   motion_.angleInterpolationBezier(PARAM_NAMES, timeLists, angleLists);
 }
 
-void KernelGraph::Rotate(float theta) const {
+void KernelGraph::Rotate(float theta) {
   assert(fabs(theta) <= PI);
 
-  posture_.goToPosture("StandInit", 0.5);
+  float time = 1;
+  Run("INIT", time);
 
   theta = GetRealAngle(theta);
   float x_speed, y_speed, t_speed, time_rotate;
   time_rotate = fabs(theta / THETA_VELOCITY);
-  x_speed     = 0;
-  y_speed     = 0;
-  t_speed     = theta / time_rotate;
+  x_speed = 0;
+  y_speed = 0;
+  t_speed = theta / time_rotate;
 
   MoveParams params;
   params.SetParam("MaxStepFrequency", 1.0);
@@ -302,98 +239,67 @@ void KernelGraph::Rotate(float theta) const {
   motion_.stopMove();
 }
 
-void KernelGraph::GoForward(float len) const {
-  assert(len >= 0);
-
-  posture_.goToPosture("StandInit", 0.5);
+void KernelGraph::GoForwardFast() {
+  float time = 1;
+  Run("INIT", time);
 
   MoveParams params;
-  params.SetParam("MaxStepX", 0.06);
-  params.SetParam("StepHeight", 0.027);
-  params.SetParam("TorsoWy", 0.01);
-  /*
-  params.SetParam("MaxStepFrequency", 0.0);
-
-  params.SetParam("TorsoWy", 0.12);
-
-
-  */
-
-  float counting_len = len;
-  motion_.setMoveArmsEnabled(true, true);
-  while (counting_len > EPS) {
-    float curr_len = std::min(counting_len, STEP_CHAIN);
-    float time_walk = curr_len / X_VELOCITY;
-
-    motion_.move(X_VELOCITY, 0, 0, params.GetParams());
-    sleep(time_walk);
-    motion_.stopMove();
-    counting_len -= curr_len;
-  }
-  motion_.setMoveArmsEnabled(false, false);
-}
-
-void KernelGraph::GoForvardFast(float len) const {
-  assert(len >= 0);
-  
-  MoveParams params;
-  params.SetParam("MaxStepX", 0.06);
+  params.SetParam("MaxStepX", 0.04);
   params.SetParam("StepHeight", 0.027);
   params.SetParam("TorsoWy", 0.01);
 
-/*
-  posture_.goToPosture("StandInit", 0.5);
-
-  MoveParams params;
-  params.SetParam("MaxStepX", 0.08);
-  params.SetParam("StepHeight", 0.035);
-  params.SetParam("TorsoWy", 0.0122);
-*/
-
-  /*
-  params.SetParam("MaxStepFrequency", 0.0);
-
-  params.SetParam("TorsoWy", 0.12);
-  */
-
   motion_.setMoveArmsEnabled(true, true);
 
-  float X_VELOCITY_ = 0.1;
-  float time_walk = len / X_VELOCITY_;
+  float X_VELOCITY_ = 0.15;
 
   motion_.move(X_VELOCITY_, 0, 0, params.GetParams());
- }
+}
 
-void KernelGraph::GoBackFast(float len) const {
-  assert(len >= 0);
-  
+void KernelGraph::GoBackFast() {
+  float time = 1;
+  Run("INIT", time);
+
   MoveParams params;
   params.SetParam("MaxStepX", 0.06);
   params.SetParam("StepHeight", 0.027);
   params.SetParam("TorsoWy", 0.01);
 
-/*
-  posture_.goToPosture("StandInit", 0.5);
+  motion_.setMoveArmsEnabled(true, true);
+
+  float X_VELOCITY_ = 0.15;
+
+  motion_.move(-X_VELOCITY_, 0, 0, params.GetParams());
+}
+
+void KernelGraph::GoLeftFast() {
+  float time = 1;
+  Run("INIT", time);
 
   MoveParams params;
-  params.SetParam("MaxStepX", 0.08);
-  params.SetParam("StepHeight", 0.035);
-  params.SetParam("TorsoWy", 0.0122);
-*/
-
-  /*
-  params.SetParam("MaxStepFrequency", 0.0);
-
-  params.SetParam("TorsoWy", 0.12);
-  */
+  params.SetParam("StepHeight", 0.027);
+  params.SetParam("TorsoWy", 0.01);
 
   motion_.setMoveArmsEnabled(true, true);
 
-  float X_VELOCITY_ = 0.1;
-  float time_walk = len / X_VELOCITY_;
+  float Y_VELOCITY_ = 0.065;
 
-  motion_.move(-X_VELOCITY_, 0, 0, params.GetParams());
- }
+  motion_.move(0, Y_VELOCITY_, 0, params.GetParams());
+}
+
+void KernelGraph::GoRightFast() {
+  float time = 1;
+  Run("INIT", time);
+
+  MoveParams params;
+  params.SetParam("StepHeight", 0.027);
+  params.SetParam("TorsoWy", -0.1);
+
+  motion_.setMoveArmsEnabled(true, true);
+
+  float Y_VELOCITY_ = 0.065;
+
+  motion_.move(0, -Y_VELOCITY_, 0, params.GetParams());
+}
 
 float KernelGraph::GetRealAngle(float theta) const {
   float sign = (theta < 0) ? -1 : 1;
@@ -401,3 +307,30 @@ float KernelGraph::GetRealAngle(float theta) const {
   return sign * new_theta;
 }
 
+void KernelGraph::ComplexTest() {
+  Wake();
+  float time = 1;
+  Run("INIT", time);
+  GoForwardFast();
+  sleep(5);
+  StopMove();
+  GoBackFast();
+  sleep(5);
+  StopMove();
+  GoLeftFast();
+  sleep(5);
+  StopMove();
+  GoRightFast();
+  sleep(5);
+  StopMove();
+  Rotate(45 * TO_RAD);
+  Rotate(-45 * TO_RAD);
+}
+
+void KernelGraph::PullLegsTogether() {
+  float time = 1;
+  Run("INIT", time);
+  GoLeftFast();
+  std::this_thread::sleep_for(std::chrono::milliseconds(1450));
+  StopMove();
+}

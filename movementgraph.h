@@ -2,31 +2,26 @@
 
 #include "kernelgraph.h"
 
-
 class MovementGraph : public AL::ALModule {
  public:
-  MovementGraph(boost::shared_ptr<AL::ALBroker> pBroker, const std::string& pName);
+  MovementGraph(boost::shared_ptr<AL::ALBroker> pBroker, const std::string &pName);
   ~MovementGraph();
 
   virtual void init();
 
-  void Move(float x, float y, float theta);
+  void GoForward();
 
-  void GoForvard(float len);
+  void GoBack();
 
-  void GoBack(float len);
+  void GoRight();
+
+  void GoLeft();
 
   void Rotate(float theta);
 
   void StartMove();
 
   void StopMove();
-
-  void SetTheta(float theta, float len);
-
-  void RightKick();
-
-  void LeftKick();
 
   float GetHeadVerticalAngle();
 
@@ -39,7 +34,7 @@ class MovementGraph : public AL::ALModule {
   void LookDown(int level);
 
   void ToInit();
-  
+
   void GetUpFront();
 
   void GetUpBack();
