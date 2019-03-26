@@ -1,0 +1,7 @@
+.idea/*
+.gitignore
+automaticInitGeneration.h
+build-*
+cmake-build-debug/*
+translate/translate/*
+
