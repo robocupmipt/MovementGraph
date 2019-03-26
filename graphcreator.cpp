@@ -72,10 +72,11 @@ void GraphCreator::init() {
       GetUpBack();
     } else if (command == "TO") {
       ToPoint();
+    } else if (command == "RUN_WAY") {
+      RunWay();
     } else {
       SmallLog("UNKNOWN COMMAND", 2);
     }
-
   }
 }
 
@@ -278,7 +279,31 @@ void GraphCreator::PullLegsTogether() {
   graph_.PullLegsTogether();
 }
 
-/*------- PRIVATE SPACE ---------*/
+void GraphCreator::RunWay() {
+  std::vector <const Edge*> way;
+  std::vector <std::string> path;
+
+
+  std::vector<float> st;
+  path.push_back("HeadYaw");
+  st.push_back(0);
+  graph_.SetStiffness(path, st, 0.1);
+
+  SmallLog("ENTER vertexes names", 2);
+
+  for (int i = 0; i < 2; ++i) {
+    std::string s;
+    std::cin >> s;
+    path.push_back(s);
+  }
+
+  if (!graph_.RunChain(path, 1, 1)) {
+    SmallLog("ERROR Cant run chain", 2);
+    return;
+  }
+}
+
+/*------- PRIVAT SPACE ---------*/
 
 
 bool GraphCreator::CheckBuffer() const {

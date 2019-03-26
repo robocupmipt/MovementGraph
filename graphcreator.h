@@ -60,6 +60,8 @@ class GraphCreator : public AL::ALModule {
   // Validation
   void ComplexTest();
 
+  void RunWay();
+
  private:
   bool CheckBuffer() const;
 

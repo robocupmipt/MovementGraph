@@ -14,8 +14,10 @@ KernelGraph::KernelGraph(boost::shared_ptr<AL::ALBroker> broker) :
 Vertex KernelGraph::GetCurrentState() const {
   bool useSensors = true;
 
-  std::vector<float> result = motion_.getAngles(PARAM_NAMES, useSensors);
-  return Vertex(result, true);
+  std::vector <float> result_value    = motion_.getAngles(PARAM_NAMES, useSensors);
+  std::vector <float> result_hardness = motion_.getStiffnesses(PARAM_NAMES);
+  
+  return Vertex(result_value, result_hardness, true);
 }
 
 bool KernelGraph::RunChain(const std::vector<std::string> &chain,
@@ -41,20 +43,21 @@ bool KernelGraph::RunChain(const std::vector<std::string> &chain,
   return true;
 }
 
-bool KernelGraph::Run(const std::string &v_name, float time) {
+bool KernelGraph::Run(const std::string &v_name, float time, float timeStiffness) {
   if (!IsVertexContains(v_name)) {
     return false;
   }
 
-  Run(GetVertex(v_name), time);
+  Run(GetVertex(v_name), time, timeStiffness);
   return true;
 }
 
-void KernelGraph::Run(const Vertex *v, float time) {
+void KernelGraph::Run(const Vertex* v, float time, float timeStiffness) {
   assert(v != nullptr);
   assert(time > 0);
-
-  motion_.angleInterpolation(PARAM_NAMES, v->GetRadianValues(), time, true);
+  
+  motion_.stiffnessInterpolation(PARAM_NAMES, v->GetHardnessValues(), time);
+  motion_.angleInterpolation(PARAM_NAMES, v->GetRadianValues(), timeStiffness, true);
 }
 
 void KernelGraph::Rest() const {
@@ -152,12 +155,20 @@ bool KernelGraph::ToPoint(const std::string &finish_name) {
   if (!FindWayToVertexFromVertex(start_name, finish_name, way)) {
     return false;
   } else {
-    RunWayDimka(way, 1);
+    RunWay(way, 1);
     return true;
   }
 }
 
-void KernelGraph::RunWayDimka(std::vector<const Edge *> edges, float acceleration) {
+void KernelGraph::SetStiffness(std::vector<std::string> motors_, 
+                               std::vector<float> stiffnesses, 
+                               float time) const {
+  motion_.stiffnessInterpolation(motors_, stiffnesses, time);
+}
+
+/*------- PRIVAT SPACE ---------*/
+
+void KernelGraph::RunWay(std::vector <const Edge*> edges, float acceleration) {
   assert(acceleration > 0);
   if (edges.empty()) {
     return;
@@ -173,7 +184,7 @@ void KernelGraph::RunWayDimka(std::vector<const Edge *> edges, float acceleratio
   }
 }
 
-void KernelGraph::RunWay(std::vector<const Edge *> edges, float acceleration) {
+void KernelGraph::RunWayBezier(std::vector <const Edge*> edges, float acceleration) {
   assert(acceleration > 0);
   if (edges.empty()) {
     return;
