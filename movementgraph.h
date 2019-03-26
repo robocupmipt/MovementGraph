@@ -9,18 +9,25 @@ class MovementGraph : public AL::ALModule {
 
   virtual void init();
 
+  // Start forward motion
   void GoForward();
 
+  // Start backward motion
   void GoBack();
 
+  // Start right motion
   void GoRight();
 
+  // Start left motion
   void GoLeft();
 
+  // Rotate theta (in radians)
   void Rotate(float theta);
 
+  // Prepare robot for motion
   void StartMove();
 
+  // Stop moving
   void StopMove();
 
   float GetHeadVerticalAngle();
@@ -31,8 +38,11 @@ class MovementGraph : public AL::ALModule {
 
   void SetHeadHorizontalAngle(float angle);
 
+  // Tilts the robot's body in order to find the ball
+  // level is a number from 0 to 7
   void LookDown(int level);
 
+  // Puts robot to initial position
   void ToInit();
 
   void GetUpFront();
