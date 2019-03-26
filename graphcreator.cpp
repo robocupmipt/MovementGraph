@@ -282,13 +282,7 @@ void GraphCreator::PullLegsTogether() {
 void GraphCreator::RunWay() {
   std::vector <const Edge*> way;
   std::vector <std::string> path;
-
-
-  std::vector<float> st;
-  path.push_back("HeadYaw");
-  st.push_back(0);
-  graph_.SetStiffness(path, st, 0.1);
-
+  
   SmallLog("ENTER vertexes names", 2);
 
   for (int i = 0; i < 2; ++i) {
