@@ -110,16 +110,16 @@ float KernelGraph::GetHeadHorizontalAngle() {
 }
 
 void KernelGraph::SetHeadVerticalAngle(float angle) {
-  assert(angle <= 38.5);
-  assert(angle >= -29.5);
+  angle = std::min(angle, static_cast<float>(38.5));
+  angle = std::max(angle, static_cast<float>(-38.5));
 
   float fractionMaxSpeed = 0.3;
   motion_.setAngles(PARAM_NAMES[1], -angle * TO_RAD, fractionMaxSpeed);
 }
 
 void KernelGraph::SetHeadHorizontalAngle(float angle) {
-  assert(angle <= 119.5);
-  assert(angle >= -119.5);
+  angle = std::min(angle, static_cast<float>(119.5));
+  angle = std::max(angle, static_cast<float>(-119.5));
 
   float fractionMaxSpeed = 0.3;
   motion_.setAngles(PARAM_NAMES[0], angle * TO_RAD, fractionMaxSpeed);
