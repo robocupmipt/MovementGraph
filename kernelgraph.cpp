@@ -302,7 +302,7 @@ void KernelGraph::GoRightFast() {
   motion_.move(0, -Y_VELOCITY_, 0, params.GetParams());
 }
 
-void KernelGraph::CircumferentialMotionPrototype(const float &rotation_speed) {
+void KernelGraph::CircumferentialMotionPrototype(float rotation_speed) {
   float time = 1;
   Run("INIT", time);
 
