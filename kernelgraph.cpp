@@ -303,23 +303,21 @@ void KernelGraph::GoRightFast() {
   motion_.move(0, -Y_VELOCITY_, 0, params.GetParams());
 }
 
-void KernelGraph::CircumferentialMotionPrototype(float rotation_speed) {
+void KernelGraph::CircumferentialMotionPrototype(float y_velocity, float rotation_speed) {
   rotation_speed = SimplifyAngle(rotation_speed); // rotation_speed = angle per second
+  rotation_speed = GetRealAngle(rotation_speed);
 
   float time = 1;
   Run("INIT", time);
 
-  float y_speed = 0.065;
-
   MoveParams params;
-  params.SetParam("StepHeight", 0.02);
-  params.SetParam("TorsoWy", 0.01);
+  params.SetParam("StepHeight", 0.027);
 
-  motion_.move(0.0, y_speed, rotation_speed, params.GetParams());
+  motion_.move(0.0, y_velocity, rotation_speed * 0.9, params.GetParams());
 }
 
 float KernelGraph::GetRealAngle(float theta) const {
-  float sign = (theta < 0) ? -1 : 1;
+  float sign = (theta < 0.0) ? -1.0 : 1.0;
   float new_theta = (fabs(theta) + 30 * TO_RAD) * 9 / 10;
   return sign * new_theta;
 }
@@ -330,7 +328,8 @@ float KernelGraph::SimplifyAngle(float theta) const {
     theta = 0.0;
 
   assert(fabs(theta) <= PI);
-  assert(fabs(theta) >= 1 * TO_RAD);
+  assert(fabs(theta) >= 1.0 * TO_RAD);
+  return theta;
 }
 
 void KernelGraph::ComplexTest() {

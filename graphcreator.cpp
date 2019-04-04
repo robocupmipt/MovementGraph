@@ -222,17 +222,17 @@ void GraphCreator::GoLeft() {
   graph_.GoLeftFast();
 }
 
+void GraphCreator::GoRight() {
+  graph_.GoRightFast();
+}
+
 void GraphCreator::CircularMotionLeft() {
-  float theta;
+  float theta, y_velocity;
 
   SmallLog("Its a CML section insert rotation speed:", 2);
   theta = SmallLog<float>("ENTER rotation speed in degrees per second:", 2, true);
-  graph_.CircumferentialMotionPrototype(theta * TO_RAD);
-}
-
-void GraphCreator::GoRight() {
-  SmallLog("Its a Go_Right section insert len:", 2);
-  graph_.GoRightFast();
+  y_velocity = SmallLog<float>("ENTER y velocity in metres per second:", 2, true);
+  graph_.CircumferentialMotionPrototype(y_velocity, theta * TO_RAD);
 }
 
 void GraphCreator::Rotate() {
