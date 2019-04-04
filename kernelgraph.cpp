@@ -304,22 +304,18 @@ void KernelGraph::GoRightFast() {
 }
 
 void KernelGraph::CircumferentialMotionPrototype(float rotation_speed) {
-  rotation_speed = SimplifyAngle(rotation_speed); // rotation_speed = anle per second
+  rotation_speed = SimplifyAngle(rotation_speed); // rotation_speed = angle per second
 
   float time = 1;
   Run("INIT", time);
 
-  float x_speed = 0;
   float y_speed = 0.065;
 
   MoveParams params;
-  params.SetParam("MaxStepFrequency", 1.0);
-  params.SetParam("MaxStepX", 0.02);
-  params.SetParam("MaxStepY", 0.10);
   params.SetParam("StepHeight", 0.02);
   params.SetParam("TorsoWy", 0.01);
 
-  motion_.move(x_speed, y_speed, rotation_speed, params.GetParams());
+  motion_.move(0.0, y_speed, rotation_speed, params.GetParams());
 }
 
 float KernelGraph::GetRealAngle(float theta) const {

@@ -211,17 +211,14 @@ void GraphCreator::Test() {
 }
 
 void GraphCreator::GoForward() {
-  SmallLog("Its a Go_Forward section insert len:", 2);
   graph_.GoForwardFast();
 }
 
 void GraphCreator::GoBack() {
-  SmallLog("Its a Go_Back section insert len:", 2);
   graph_.GoBackFast();
 }
 
 void GraphCreator::GoLeft() {
-  SmallLog("Its a Go_Left section insert len:", 2);
   graph_.GoLeftFast();
 }
 
