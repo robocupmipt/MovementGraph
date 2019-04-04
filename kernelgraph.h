@@ -90,6 +90,8 @@ class KernelGraph : public PrimalGraph {
 
   float GetRealAngle(float theta) const;
 
+  float SimplifyAngle(float theta) const;
+
  private:
   boost::shared_ptr<AL::ALBroker> broker_;
   mutable AL::ALMotionProxy motion_;

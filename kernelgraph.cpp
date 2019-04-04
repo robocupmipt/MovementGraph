@@ -1,7 +1,9 @@
 #include "kernelgraph.h"
 
-#include <thread>
+
 #include <chrono>
+#include <cmath>
+#include <thread>
 
 KernelGraph::KernelGraph(boost::shared_ptr<AL::ALBroker> broker) :
     broker_(broker),
@@ -216,8 +218,7 @@ void KernelGraph::RunWayBezier(std::vector <const Edge*> edges, float accelerati
 }
 
 void KernelGraph::Rotate(float theta) {
-  // TODO : replace this by function-converter to [-pi;pi]
-  assert(fabs(theta) <= PI);
+  theta = SimplifyAngle(theta);
 
   float time = 1;
   Run("INIT", time);
@@ -303,6 +304,8 @@ void KernelGraph::GoRightFast() {
 }
 
 void KernelGraph::CircumferentialMotionPrototype(float rotation_speed) {
+  rotation_speed = SimplifyAngle(rotation_speed); // rotation_speed = anle per second
+
   float time = 1;
   Run("INIT", time);
 
@@ -323,6 +326,15 @@ float KernelGraph::GetRealAngle(float theta) const {
   float sign = (theta < 0) ? -1 : 1;
   float new_theta = (fabs(theta) + 30 * TO_RAD) * 9 / 10;
   return sign * new_theta;
+}
+
+float KernelGraph::SimplifyAngle(float theta) const {
+  theta = fmod(theta, PI);
+  if (fabs(theta) < 1.0 * TO_RAD)
+    theta = 0.0;
+
+  assert(fabs(theta) <= PI);
+  assert(fabs(theta) >= 1 * TO_RAD);
 }
 
 void KernelGraph::ComplexTest() {
