@@ -47,6 +47,8 @@ class KernelGraph : public PrimalGraph {
 
   void GoRightFast();
 
+  void CircumferentialMotionPrototype(const float &rotation_speed);
+
   void StopMove() const;
 
   void StartMove() const;

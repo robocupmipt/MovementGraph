@@ -216,6 +216,7 @@ void KernelGraph::RunWayBezier(std::vector <const Edge*> edges, float accelerati
 }
 
 void KernelGraph::Rotate(float theta) {
+  // TODO : replace this by function-converter to [-pi;pi]
   assert(fabs(theta) <= PI);
 
   float time = 1;
@@ -281,9 +282,9 @@ void KernelGraph::GoLeftFast() {
 
   motion_.setMoveArmsEnabled(true, true);
 
-  float Y_VELOCITY_ = 0.065;
+  float y_velocity = 0.065;
 
-  motion_.move(0, Y_VELOCITY_, 0, params.GetParams());
+  motion_.move(0, y_velocity, 0, params.GetParams());
 }
 
 void KernelGraph::GoRightFast() {
@@ -299,6 +300,23 @@ void KernelGraph::GoRightFast() {
   float Y_VELOCITY_ = 0.065;
 
   motion_.move(0, -Y_VELOCITY_, 0, params.GetParams());
+}
+
+void KernelGraph::CircumferentialMotionPrototype(const float &rotation_speed) {
+  float time = 1;
+  Run("INIT", time);
+
+  float x_speed = 0;
+  float y_speed = 0.065;
+
+  MoveParams params;
+  params.SetParam("MaxStepFrequency", 1.0);
+  params.SetParam("MaxStepX", 0.02);
+  params.SetParam("MaxStepY", 0.10);
+  params.SetParam("StepHeight", 0.02);
+  params.SetParam("TorsoWy", 0.01);
+
+  motion_.move(x_speed, y_speed, rotation_speed, params.GetParams());
 }
 
 float KernelGraph::GetRealAngle(float theta) const {
