@@ -285,8 +285,10 @@ void GraphCreator::ComplexTest() {
 }
 
 void GraphCreator::PullLegsTogether() {
-  SmallLog("Moving legs", 2);
-  graph_.PullLegsTogether();
+  int milliseconds;
+  SmallLog("Its a pulling legs section insert time period in milliseconds:", 2);
+  milliseconds = SmallLog<float>("ENTER milliseconds:", 2, true);
+  graph_.PullLegsTogether(milliseconds);
 }
 
 void GraphCreator::RunWay() {

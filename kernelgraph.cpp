@@ -357,10 +357,10 @@ void KernelGraph::ComplexTest() {
   Rotate(-45 * TO_RAD);
 }
 
-void KernelGraph::PullLegsTogether() {
+void KernelGraph::PullLegsTogether(int milliseconds) {
   float time = 1;
   Run("INIT", time);
   GoLeftFast();
-  std::this_thread::sleep_for(std::chrono::milliseconds(1450));
+  std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
   StopMove();
 }

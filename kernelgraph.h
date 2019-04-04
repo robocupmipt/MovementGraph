@@ -55,7 +55,7 @@ class KernelGraph : public PrimalGraph {
 
   void Rotate(float theta);
 
-  void PullLegsTogether();
+  void PullLegsTogether(int milliseconds);
 
   void GetUpFront();
 
