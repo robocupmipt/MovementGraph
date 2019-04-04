@@ -39,6 +39,8 @@ class GraphCreator : public AL::ALModule {
 
   void GoRight();
 
+  void CircularMotionLeft();
+
   void Rotate();
 
   void PullLegsTogether();

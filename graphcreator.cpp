@@ -52,6 +52,8 @@ void GraphCreator::init() {
       GoBack();
     } else if (command == "GO_LEFT") {
       GoLeft();
+    } else if (command == "CML") { // testing
+      CircularMotionLeft();
     } else if (command == "GO_RIGHT") {
       GoRight();
     } else if (command == "START_MOVE") {
@@ -221,6 +223,14 @@ void GraphCreator::GoBack() {
 void GraphCreator::GoLeft() {
   SmallLog("Its a Go_Left section insert len:", 2);
   graph_.GoLeftFast();
+}
+
+void GraphCreator::CircularMotionLeft() {
+  float theta;
+
+  SmallLog("Its a CML section insert rotation speed:", 2);
+  theta = SmallLog<float>("ENTER rotation speed in degrees per second:", 2, true);
+  graph_.CircumferentialMotionPrototype(theta * TO_RAD);
 }
 
 void GraphCreator::GoRight() {
